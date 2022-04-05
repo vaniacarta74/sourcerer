@@ -1,9 +1,9 @@
 {
-    "name": "vaniacarta74/surcerer",
+    "name": "vaniacarta74/sourcerer",
     "description": "Codice esterno per la creazione di contenuti dinamici all'interno del SiTPiT",
     "minimum-stability": "stable",
     "type": "library",
-    "keywords": ["SiTPiT", "Surcerer"],    
+    "keywords": ["SiTPiT", "Sourcerer"],    
     "license": "MIT",
     "authors": [
         {
@@ -12,8 +12,8 @@
         }
     ],
     "support": {
-        "source": "https://github.com/vaniacarta74/surcerer",
-        "issues": "https://github.com/vaniacarta74/surcerer/issues"
+        "source": "https://github.com/vaniacarta74/sourcerer",
+        "issues": "https://github.com/vaniacarta74/sourcerer/issues"
     },
     "require": {
         "php": "^8.1"
@@ -26,14 +26,14 @@
             "src/config/config.php"            
         ],
         "psr-4": {
-            "vaniacarta74\\Surcerer\\": "src/",
-            "vaniacarta74\\Surcerer\\tests\\": "tests/"
+            "vaniacarta74\\Sourcerer\\": "src/",
+            "vaniacarta74\\Sourcerer\\tests\\": "tests/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "vaniacarta74\\Surcerer\\": "src/",
-            "vaniacarta74\\Surcerer\\tests\\": "tests/" 
+            "vaniacarta74\\Sourcerer\\": "src/",
+            "vaniacarta74\\Sourcerer\\tests\\": "tests/" 
         }
     }
 }
