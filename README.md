@@ -1,2 +1,2 @@
 # surcerer
-Codice sorgente esterno scritto per il SiTPiT
+Procedure per la creazione di pagine dinamiche da includere negli articoli del CMS del SiTPiT.

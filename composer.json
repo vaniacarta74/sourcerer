@@ -1,0 +1,39 @@
+{
+    "name": "vaniacarta74/surcerer",
+    "description": "Codice esterno per la creazione di contenuti dinamici all'interno del SiTPiT",
+    "minimum-stability": "stable",
+    "type": "library",
+    "keywords": ["SiTPiT", "Surcerer"],    
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vania Carta",
+            "email": "vania.carta@me.com"
+        }
+    ],
+    "support": {
+        "source": "https://github.com/vaniacarta74/surcerer",
+        "issues": "https://github.com/vaniacarta74/surcerer/issues"
+    },
+    "require": {
+        "php": "^8.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "files": [
+            "src/config/config.php"            
+        ],
+        "psr-4": {
+            "vaniacarta74\\Surcerer\\": "src/",
+            "vaniacarta74\\Surcerer\\tests\\": "tests/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "vaniacarta74\\Surcerer\\": "src/",
+            "vaniacarta74\\Surcerer\\tests\\": "tests/" 
+        }
+    }
+}
