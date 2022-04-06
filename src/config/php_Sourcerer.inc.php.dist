@@ -1,0 +1,11 @@
+<?php
+$server = filter_input(INPUT_SERVER, 'SERVER_NAME') ?? getHostByName(getHostName());
+
+if ($server == 'xxxxxx') {
+    $enasURL = 'yyyyyy';
+} else {
+    $enasURL = 'zzzzzz';
+}
+
+define('SITPIT_HOST',$server);
+define('ENAS_SERVER_WEB_HOST',$enasURL);

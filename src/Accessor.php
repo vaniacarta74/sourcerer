@@ -17,7 +17,13 @@ use vaniacarta74\Sourcerer\Error;
  */
 class Accessor
 {
-    public function __call($name, $arguments)
+    /**
+     * @param string $name
+     * @param array $arguments
+     * @return boolean|mixed
+     * @throws \Exception
+     */
+    public function __call(string $name, array $arguments)
     {
         try {
             $method = substr($name, 0, 3);
@@ -33,7 +39,6 @@ class Accessor
                     throw new \Exception('Nome metodo accessorio errato');
                     break;
             }
-            //if ($response) {
             if (isset($response) && $response !== false) {
                 return $response;
             } else {
@@ -45,7 +50,13 @@ class Accessor
         }        
     }
     
-    public function setAccessor($property, $arguments)
+    /**
+     * @param string $property
+     * @param array $arguments
+     * @return boolean
+     * @throws \Exception
+     */
+    public function setAccessor(string $property, array $arguments)
     {
         try {
             $response = false;
@@ -62,7 +73,12 @@ class Accessor
         // @codeCoverageIgnoreEnd
     }
     
-    public function getAccessor($property)
+    /**
+     * @param string $property
+     * @return boolean|mixed
+     * @throws \Exception
+     */
+    public function getAccessor(string $property)
     {
         try {
             if (property_exists($this, $property)) {

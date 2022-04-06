@@ -30,7 +30,7 @@ class Error
      * @param int $debug_level Livello di debug
      * @return void
      */
-    public static function debugLevel()
+    public static function debugLevel() : int
     {
         return defined('DEBUG_LEVEL') ? DEBUG_LEVEL : 1;
     }
@@ -46,7 +46,7 @@ class Error
      * @param int $debug_level Livello di debug
      * @return void
      */
-    public static function printErrorInfo($functionName, $debug_level)
+    public static function printErrorInfo(string $functionName, int $debug_level) : void
     {
         $date = new \DateTime('NOW', new \DateTimeZone('Europe/Rome'));
         switch ($debug_level) {
@@ -74,7 +74,7 @@ class Error
      * @param bool $isCli Vero o falso a seconda del contesto
      * @return void
      */
-    public static function errorHandler($e, $debug_level, $type)
+    public static function errorHandler(\Throwable $e, int $debug_level, string $type) : void
     {
         switch ($debug_level) {
             case 0:
@@ -103,7 +103,7 @@ class Error
      * @param bool $isCli Vero o falso a seconda del contesto
      * @return void
      */
-    public static function noticeHandler($e, $debug_level,$type)
+    public static function noticeHandler(\Throwable $e, int $debug_level, string $type) : void
     {
         $date = new \DateTime('NOW', new \DateTimeZone('Europe/Rome'));
         switch ($debug_level) {
@@ -129,10 +129,10 @@ class Error
      * @param string $message Il messaggio da stampare
      * @return void
      */
-    public static function appendToFile($message)
+    public static function appendToFile(string $message) : void
     {
         file_put_contents(self::$logFile, $message, FILE_APPEND);
-        chmod(self::$logFile, 0777);
+        //chmod(self::$logFile, 0777);
     }
     
     /**
@@ -146,7 +146,7 @@ class Error
      * @param \Throwable $e Oggetto che gestisce l'errore/eccezione/notifica
      * @return string Messaggio di errore formattato
      */
-    public static function errorMsgCli($e)
+    public static function errorMsgCli(\Throwable $e) : string
     {
         $offset = 3;
         $message = 'Descrizione Errore' . PHP_EOL;
@@ -181,7 +181,7 @@ class Error
      * @param \Throwable $e Oggetto che gestisce l'errore/eccezione/notifica
      * @return string Messaggio di errore formattato
      */
-    public static function errorMsgHtml($e)
+    public static function errorMsgHtml(\Throwable $e) : string
     {
         $message = '<br/><b>Descrizione Errore</b><br/>';
         $message .= 'File: ' . $e->getFile() . '<br/>';
@@ -210,7 +210,7 @@ class Error
      * @param \Throwable $e Oggetto che gestisce l'errore/eccezione/notifica
      * @return string Messaggio di errore formattato
      */
-    public static function errorMsgJson($e)
+    public static function errorMsgJson(\Throwable $e) : string
     {
         $arrJson = [
             'Descrizione errore' => [
@@ -241,7 +241,7 @@ class Error
      * @param \Throwable $e Oggetto che gestisce l'errore/eccezione/notifica
      * @return string Messaggio di errore formattato
      */
-    public static function noticeMsgCli($e)
+    public static function noticeMsgCli(\Throwable $e) : string
     {
         return 'Notifica: ' . htmlspecialchars(strip_tags($e->getMessage())) . PHP_EOL;       
     }
@@ -257,7 +257,7 @@ class Error
      * @param \Throwable $e Oggetto che gestisce l'errore/eccezione/notifica
      * @return string Messaggio di errore formattato
      */
-    public static function noticeMsgHtml($e)
+    public static function noticeMsgHtml(\Throwable $e) : string
     {
         return '<b>Notifica:</b> ' . $e->getMessage() . '<br/>';
     }
@@ -273,7 +273,7 @@ class Error
      * @param \Throwable $e Oggetto che gestisce l'errore/eccezione/notifica
      * @return string Messaggio di errore formattato
      */
-    public static function noticeMsgJson($e)
+    public static function noticeMsgJson(\Throwable $e) : string
     {
         $arrJson = [
             'ok' => false,
