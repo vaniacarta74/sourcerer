@@ -18,16 +18,16 @@ use vaniacarta74\Sourcerer\Error;
  */
 class Router extends Accessor
 {
-    protected $file;
+    protected $route;
         
     /**
-     * @param string $path
+     * @param string $resource
      * @throws \Exception
      */
-    public function __construct(string $path)
+    public function __construct(string $resource)
     {
         try {            
-            $this->setFile($path, ROUTES);
+            $this->setRoute($resource, ROUTES);
         } catch (\Exception $e) {
             Error::printErrorInfo(__FUNCTION__, Error::debugLevel());
             throw $e;
@@ -35,18 +35,18 @@ class Router extends Accessor
     }
     
     /**
-     * @param string $path
+     * @param string $resource
      * @param array $routes
      * @return boolean
      * @throws \Exception
      */
-    private function setFile(string $path, array $routes)
+    private function setRoute(string $resource, array $routes)
     {
         try {
             $isOk = false;
-            foreach ($routes as $file => $route) {
-                if (strpos($path, $file) !== false) {
-                    $this->file = $route['path'];
+            foreach ($routes as $routeName => $attributes) {
+                if (strpos($resource, $routeName) !== false) {
+                    $this->route = $attributes['route'];
                     $isOk = true;
                     break;
                 }

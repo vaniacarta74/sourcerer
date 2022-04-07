@@ -12,6 +12,6 @@ try {
         throw new \Exception('Host Telecontrollo Classico non definito');
     }    
 } catch (\Throwable $e) {
-    Error::errorHandler($e, DEBUG_LEVEL, 'cli');
+    Error::errorHandler($e, DEBUG_LEVEL, 'html');
     exit();
 }

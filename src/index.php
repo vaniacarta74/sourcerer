@@ -17,10 +17,10 @@ try {
         $url = $uri;
     }
     
-    $path = strtok($url, '?');
+    $resource = strtok($url, '?');
     
-    $router = new Router($path); 
-    $route = $router->getFile();  
+    $router = new Router($resource); 
+    $route = $router->getRoute();  
     
     header('Location: http://' . SITPIT_HOST . $route);
     
