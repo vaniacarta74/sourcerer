@@ -1,0 +1,64 @@
+<?php
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+namespace vaniacarta74\Sourcerer;
+
+use vaniacarta74\Sourcerer\Accessor;
+use vaniacarta74\Sourcerer\Error;
+
+/**
+ * Description of Sanitizer
+ *
+ * @author Vania
+ */
+class Sanitizer extends Accessor
+{
+    protected $route;
+        
+    /**
+     * @param string $resource
+     * @throws \Exception
+     */
+    public function __construct(string $resource)
+    {
+        try {            
+            $this->setRoute($resource, ROUTES);
+        } catch (\Exception $e) {
+            Error::printErrorInfo(__FUNCTION__, Error::debugLevel());
+            throw $e;
+        }
+    } 
+    
+    /**
+     * @param string $resource
+     * @param array $routes
+     * @return boolean
+     * @throws \Exception
+     */
+    private function setRoute(string $resource, array $routes)
+    {
+        try {
+            $isOk = false;
+            foreach ($routes as $routeName => $attributes) {
+                if (strpos($resource, $routeName) !== false) {
+                    $this->route = $attributes['route'];
+                    $isOk = true;
+                    break;
+                }
+            }
+            if ($isOk) {
+                return $isOk;
+            } else {
+                throw new \Exception('Nome file non trovato.');
+            }        
+        } catch (\Exception $e) {
+            Error::printErrorInfo(__FUNCTION__, Error::debugLevel());
+            throw $e;
+        }
+    }
+}
