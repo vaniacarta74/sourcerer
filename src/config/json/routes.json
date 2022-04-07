@@ -1,5 +1,9 @@
 {
     "telecontrollo_classico": {
-        "path": "/source/telecontrollo_classico.php"
+        "path": "/source/telecontrollo_classico.php",
+        "params": {
+            "local": "/telecontrollo/index.asp?MM_Logoutnow=1",
+            "remote": "/telecontrollo/index.php"
+        }
     }
 }

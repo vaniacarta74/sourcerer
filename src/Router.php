@@ -26,10 +26,8 @@ class Router extends Accessor
      */
     public function __construct(string $path)
     {
-        try {
-            $strJson = @file_get_contents(__DIR__ . '/config/json/routes.json');
-            $routes = json_decode($strJson, true);
-            $this->setFile($path, $routes);
+        try {            
+            $this->setFile($path, ROUTES);
         } catch (\Exception $e) {
             Error::printErrorInfo(__FUNCTION__, Error::debugLevel());
             throw $e;
