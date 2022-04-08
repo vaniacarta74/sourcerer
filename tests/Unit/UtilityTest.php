@@ -10,6 +10,8 @@ namespace vaniacarta74\Sourcerer\tests\Unit;
 use PHPUnit\Framework\TestCase;
 use vaniacarta74\Sourcerer\api\Utility;
 
+
+//require_once '../providers/functions.php';
 /**
  * Description of UtilityTest
  *
@@ -30,7 +32,7 @@ class UtilityTest extends TestCase
         
         $actual = Utility::benchmark($date);
         
-        if (PHP_MAJOR_VERSION >= 8 && PHP_MINOR_VERSION >= 1) {
+        if (PHP_MAJOR_VERSION >= 7 && PHP_MINOR_VERSION >= 4) {
             $this->assertMatchesRegularExpression('/^([1-9]\s(ora)[,]\s([1-5]?[0-9])\s(min)\s[e]\s([1-5]?[0-9])\s(sec))$/', $actual);
         } else {
             $this->assertRegExp('/^([1-9]\s(ora)[,]\s([1-5]?[0-9])\s(min)\s[e]\s([1-5]?[0-9])\s(sec))$/', $actual);
@@ -49,7 +51,7 @@ class UtilityTest extends TestCase
         
         $actual = Utility::benchmark($date);
                 
-        if (PHP_MAJOR_VERSION >= 8 && PHP_MINOR_VERSION >= 1) {
+        if (PHP_MAJOR_VERSION >= 7 && PHP_MINOR_VERSION >= 4) {
             $this->assertMatchesRegularExpression('/^(([1-9]|[1-5][0-9])\s(min)\s[e]\s([1-5]?[0-9])\s(sec))$/', $actual);
         } else {
             $this->assertRegExp('/^(([1-9]|[1-5][0-9])\s(min)\s[e]\s([1-5]?[0-9])\s(sec))$/', $actual);
@@ -68,7 +70,7 @@ class UtilityTest extends TestCase
         
         $actual = Utility::benchmark($date);
         
-        if (PHP_MAJOR_VERSION >= 8 && PHP_MINOR_VERSION >= 1) {
+        if (PHP_MAJOR_VERSION >= 7 && PHP_MINOR_VERSION >= 4) {
             $this->assertMatchesRegularExpression('/^(([1-5]?[0-9])[,][0-9]{3}\s(sec))$/', $actual);
         } else {
             $this->assertRegExp('/^(([1-5]?[0-9])[,][0-9]{3}\s(sec))$/', $actual);
@@ -87,5 +89,38 @@ class UtilityTest extends TestCase
         $this->expectException(\Exception::class);
         
         Utility::benchmark($date);
-    }   
+    }
+    
+    /**
+     * @group utility
+     * @covers \vaniacarta74\Sourcerer\api\Utility::callback
+     */
+    public function testCallbackEquals() : void  
+    {        
+        $funzione = 'testFunction';
+        
+        $params = 'pippo';        
+        
+        $expected = 'pippo';
+        
+        $actual = Utility::callback($funzione, array($params));
+        
+        $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * @group utility
+     * @covers \vaniacarta74\Sourcerer\api\Utility::callback
+     */
+    public function testCallbackException() : void
+    {
+        
+        $funzione = 'pippo';
+        
+        $params = 'paperino';
+        
+        $this->expectException(\Exception::class);
+        
+        Utility::callback($funzione, array($params));
+    }
 }

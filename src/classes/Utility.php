@@ -76,4 +76,33 @@ class Utility
             throw $e;        
         }
     }
+    
+    /**
+     * Stampa il tempo trascorso da una certa data.
+     *
+     * Il metodo benchmark() fornisce l'intervallo di tempo intercorso da una
+     * certa data. Viene utilizzato per calcolare il tempo di esecuzione della
+     * procedura.
+     *
+     * @param string $functionName
+     * @param array $params
+     * @return string Intervallo intercorso nel formato "secondi,millisecondi"
+     */
+    public static function callback(string $functionName, array $params)
+    {
+        try {
+            $function = __NAMESPACE__ . '\\' . $functionName;
+            if (is_callable($function)) {
+                $result = call_user_func_array($function, $params);
+            } elseif (is_callable($functionName)) {
+                $result = call_user_func_array($functionName, $params);
+            } else {
+                throw new \Exception('Funzione inesistente');
+            }        
+            return $result;
+        } catch (\Throwable $e) {        
+            Error::printErrorInfo(__FUNCTION__, Error::debugLevel());
+            throw $e;        
+        }
+    }    
 }

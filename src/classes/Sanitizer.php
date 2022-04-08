@@ -46,7 +46,7 @@ class Sanitizer
      * @param array|int $options
      * @return mixed
      */
-    public static function inputServer(string $constant_name, int $filter = FILTER_DEFAULT, array|int $options = 0) : mixed
+    public static function inputServer(string $constant_name, int $filter = FILTER_DEFAULT, ?int $options = 0) : string
     {
         try {
             $response = filter_input(INPUT_SERVER, $constant_name, $filter, $options);
