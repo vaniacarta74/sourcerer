@@ -1,7 +1,7 @@
 <?php
 namespace vaniacarta74\Sourcerer;
 
-use vaniacarta74\Sourcerer\Error;
+use vaniacarta74\Sourcerer\api\Error;
 
 require __DIR__ . '/../vendor/autoload.php';
 
