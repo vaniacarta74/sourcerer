@@ -14,7 +14,7 @@ use vaniacarta74\Sourcerer\api\Error;
 /**
  * Description of Router
  *
- * @author Vania
+ * @author Vania Carta
  */
 class Router extends Accessor
 {

@@ -13,7 +13,7 @@ use vaniacarta74\Sourcerer\api\Error;
 /**
  * Description of Sanitizer
  *
- * @author Vania
+ * @author Vania Carta
  */
 class Sanitizer
 {

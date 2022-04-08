@@ -3,26 +3,12 @@ namespace vaniacarta74\Sourcerer;
 
 use vaniacarta74\Sourcerer\api\Router;
 use vaniacarta74\Sourcerer\api\Error;
-use vaniacarta74\Sourcerer\api\Sanitizer;
+use vaniacarta74\Sourcerer\api\Utility;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-try {
-//    $file = filter_input(INPUT_GET, 'file');
-//    $uri = filter_input(INPUT_SERVER, 'REQUEST_URI');
-    
-    $file = Sanitizer::inputGet('file');
-    $uri = Sanitizer::inputServer('REQUEST_URI');
-    
-    if ($file) {        
-        $taditional = 'index.php?file=' . $file;        
-        $restful = 'api/' . $file . '/?';
-        $url = str_replace($taditional, $restful, $uri);
-    } else {    
-        $url = $uri;
-    }
-    
-    $resource = strtok($url, '?');
+try {    
+    $resource = Utility::convertUrl('file');
     
     $router = new Router($resource); 
     $route = $router->getRoute();  

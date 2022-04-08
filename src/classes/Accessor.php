@@ -13,7 +13,7 @@ use vaniacarta74\Sourcerer\api\Error;
 /**
  * Description of Accessor
  *
- * @author Vania
+ * @author Vania Carta
  */
 class Accessor
 {

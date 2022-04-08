@@ -9,3 +9,4 @@ if ($server == 'xxxxxx') {
 
 define('SITPIT_HOST',$server);
 define('ENAS_SERVER_WEB_HOST',$enasURL);
+define('SITE', 'local');                            //valori possibili: 'local|remote'
