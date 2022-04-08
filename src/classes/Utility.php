@@ -52,27 +52,6 @@ class Utility
     }
     
     /**     
-     * @param string $functionName
-     * @param array $params
-     * @return mixed
-     */
-    public static function callback(string $functionName, array $params) : mixed
-    {
-        try {
-            $function = __NAMESPACE__ . '\\' . $functionName;
-            if (is_callable($function)) {
-                $result = call_user_func_array($function, $params);
-            } else {
-                throw new \Exception('Funzione inesistente');
-            }        
-            return $result;
-        } catch (\Throwable $e) {        
-            Error::printErrorInfo(__FUNCTION__, Error::debugLevel());
-            throw $e;        
-        }
-    }
-    
-    /**     
      * @param string $paramName
      * @return string
      */

@@ -32,7 +32,9 @@ class Error
      */
     public static function debugLevel() : int
     {
+        // @codeCoverageIgnoreStart
         return defined('DEBUG_LEVEL') ? DEBUG_LEVEL : 1;
+        // @codeCoverageIgnoreEnd
     }
     
     /**
@@ -71,7 +73,7 @@ class Error
      *
      * @param \Throwable $e Oggetto che gestisce l'errore/eccezione/notifica
      * @param int $debug_level Livello di debug
-     * @param bool $isCli Vero o falso a seconda del contesto
+     * @param string $type
      * @return void
      */
     public static function errorHandler(\Throwable $e, int $debug_level, string $type) : void
@@ -100,7 +102,7 @@ class Error
      *
      * @param \Throwable $e Oggetto che gestisce l'errore/eccezione/notifica
      * @param int $debug_level Livello di debug
-     * @param bool $isCli Vero o falso a seconda del contesto
+     * @param string $type
      * @return void
      */
     public static function noticeHandler(\Throwable $e, int $debug_level, string $type) : void
