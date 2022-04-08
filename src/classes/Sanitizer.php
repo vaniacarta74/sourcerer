@@ -8,7 +8,6 @@
 
 namespace vaniacarta74\Sourcerer\api;
 
-use vaniacarta74\Sourcerer\api\Accessor;
 use vaniacarta74\Sourcerer\api\Error;
 
 /**
@@ -16,47 +15,49 @@ use vaniacarta74\Sourcerer\api\Error;
  *
  * @author Vania
  */
-class Sanitizer extends Accessor
+class Sanitizer
 {
-    protected $route;
-        
     /**
-     * @param string $resource
-     * @throws \Exception
+     * @param string $var_name
+     * @param int $filter
+     * @param array|int $options
+     * @return mixed
      */
-    public function __construct(string $resource)
+    public static function inputGet(string $var_name, int $filter = FILTER_DEFAULT, array|int $options = 0) : mixed
     {
-        try {            
-            $this->setRoute($resource, ROUTES);
-        } catch (\Exception $e) {
+        try {
+            $response = filter_input(INPUT_GET, $var_name, $filter, $options);
+            if (is_null($response)) {
+                throw new \Exception('Parametro ' . $var_name . ' neccessario.');
+            } elseif (!$response) {
+                throw new \Exception('Filtraggio valore parametro ' . $var_name . ' fallito.');
+            } else {
+                return $response;
+            }
+        } catch (\Throwable $e) {
             Error::printErrorInfo(__FUNCTION__, Error::debugLevel());
             throw $e;
         }
-    } 
+    }
     
     /**
-     * @param string $resource
-     * @param array $routes
-     * @return boolean
-     * @throws \Exception
+     * @param string $constant_name
+     * @param int $filter
+     * @param array|int $options
+     * @return mixed
      */
-    private function setRoute(string $resource, array $routes)
+    public static function inputServer(string $constant_name, int $filter = FILTER_DEFAULT, array|int $options = 0) : mixed
     {
         try {
-            $isOk = false;
-            foreach ($routes as $routeName => $attributes) {
-                if (strpos($resource, $routeName) !== false) {
-                    $this->route = $attributes['route'];
-                    $isOk = true;
-                    break;
-                }
-            }
-            if ($isOk) {
-                return $isOk;
+            $response = filter_input(INPUT_SERVER, $constant_name, $filter, $options);
+            if (is_null($response)) {
+                throw new \Exception('Valore $_SERVER[\'' . $constant_name . '\'] non settato.');
+            } elseif (!$response) {
+                throw new \Exception('Filtraggio valore parametro $_SERVER[\'' . $constant_name . '\'] fallito.');
             } else {
-                throw new \Exception('Nome file non trovato.');
-            }        
-        } catch (\Exception $e) {
+                return $response;
+            }
+        } catch (\Throwable $e) {
             Error::printErrorInfo(__FUNCTION__, Error::debugLevel());
             throw $e;
         }
