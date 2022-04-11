@@ -10,21 +10,21 @@ header("Access-Control-Allow-Methods: POST, GET, PUT, PATCH, DELETE");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-$method = $_SERVER['REQUEST_METHOD'];
+$method = filter_input(INPUT_SERVER, 'REQUEST_METHOD');
 
 switch ($method) {
     case 'GET':
         $report = [
             'method' => 'GET',
-            'params' => $_GET
+            'params' => filter_input_array(INPUT_GET)
         ];
         break;
     case 'POST':        
-        if (isset($_GET['json']) && $_GET['json']) {
+        if (filter_input(INPUT_GET, 'json')) {        
             $params = @file_get_contents('php://input');
             $arrPost = json_decode($params, true);
         } else {
-            $arrPost = $_POST;
+            $arrPost = filter_input_array(INPUT_POST);
         }
         $report = [
             'method' => 'POST',
@@ -34,19 +34,19 @@ switch ($method) {
     case 'PUT':
         $report = [
             'method' => 'PUT',
-            'params' => $_GET
+            'params' => filter_input_array(INPUT_GET)
         ];
         break;
     case 'PATCH':
         $report = [
             'method' => 'PATCH',
-            'params' => $_GET
+            'params' => filter_input_array(INPUT_GET)
         ];
         break;
     case 'DELETE':
         $report = [
             'method' => 'DELETE',
-            'params' => $_GET
+            'params' => filter_input_array(INPUT_GET)
         ];
         break;
 }

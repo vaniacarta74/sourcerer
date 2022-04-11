@@ -7,7 +7,7 @@
 
 namespace vaniacarta74\Sourcerer\api;
 
-use vaniacarta74\Sourcerer\api\Sanitizer;
+//use vaniacarta74\Sourcerer\api\Sanitizer;
 
 /**
  * Description of Tools
@@ -23,9 +23,9 @@ class Tools {
     public static function convertUrl(string $paramName) : string
     {
         try {
-            $paramValue = Sanitizer::inputGet($paramName);
-            $uri = Sanitizer::inputServer('REQUEST_URI');
-            $self = Sanitizer::inputServer('PHP_SELF');
+            $paramValue = filter_input(INPUT_GET, $paramName);
+            $uri = filter_input(INPUT_SERVER, 'REQUEST_URI');
+            $self = filter_input(INPUT_SERVER, 'PHP_SELF');
             
             if ($paramValue) {        
                 $taditional = $self . '?' . $paramName . '=' . $paramValue;        

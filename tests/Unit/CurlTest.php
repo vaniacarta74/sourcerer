@@ -33,7 +33,7 @@ class CurlTest extends TestCase
                     "ok": true,
                     "response": {
                         "method": "GET",
-                        "params": []
+                        "params": null
                     }
                 }'
             ],
