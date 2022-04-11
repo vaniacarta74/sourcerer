@@ -55,8 +55,6 @@ class SanitizerTest extends TestCase
     {
         $query = http_build_query($params);
         
-        var_dump($query);
-        
         $queryUrl = $url . '?' . $query;
         
         $actual = Curl::run($queryUrl, $method, $params, $isJson);

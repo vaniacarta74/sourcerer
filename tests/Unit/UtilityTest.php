@@ -43,7 +43,7 @@ class UtilityTest extends TestCase
         
         $actual = Utility::benchmark($date);
         
-        if ((PHP_MAJOR_VERSION * 10 + PHP_MINOR_VERSION)>= 81) {
+        if ((PHP_MAJOR_VERSION * 10 + PHP_MINOR_VERSION)>= 74) {
             $this->assertMatchesRegularExpression('/^([1-9]\s(ora)[,]\s([1-5]?[0-9])\s(min)\s[e]\s([1-5]?[0-9])\s(sec))$/', $actual);
         } else {
             $this->assertRegExp('/^([1-9]\s(ora)[,]\s([1-5]?[0-9])\s(min)\s[e]\s([1-5]?[0-9])\s(sec))$/', $actual);
@@ -62,7 +62,7 @@ class UtilityTest extends TestCase
         
         $actual = Utility::benchmark($date);
                 
-        if ((PHP_MAJOR_VERSION * 10 + PHP_MINOR_VERSION)>= 81) {
+        if ((PHP_MAJOR_VERSION * 10 + PHP_MINOR_VERSION)>= 74) {
             $this->assertMatchesRegularExpression('/^(([1-9]|[1-5][0-9])\s(min)\s[e]\s([1-5]?[0-9])\s(sec))$/', $actual);
         } else {
             $this->assertRegExp('/^(([1-9]|[1-5][0-9])\s(min)\s[e]\s([1-5]?[0-9])\s(sec))$/', $actual);
@@ -81,7 +81,7 @@ class UtilityTest extends TestCase
         
         $actual = Utility::benchmark($date);
         
-        if ((PHP_MAJOR_VERSION * 10 + PHP_MINOR_VERSION)>= 81) {
+        if ((PHP_MAJOR_VERSION * 10 + PHP_MINOR_VERSION)>= 74) {
             $this->assertMatchesRegularExpression('/^(([1-5]?[0-9])[,][0-9]{3}\s(sec))$/', $actual);
         } else {
             $this->assertRegExp('/^(([1-5]?[0-9])[,][0-9]{3}\s(sec))$/', $actual);

@@ -177,9 +177,9 @@ class CurlTest extends TestCase
             'field' => 'portata',
             'full' => '0'
         ];
-        $url = 'http://localhost/source_tests/providers/jsonTest.php';
+        $url = 'http://localhost/source_tests/providers/curlTest.php';
         $json = false;
-        $expected = '{"var":"30030","datefrom":"30\/12\/2019","dateto":"31\/12\/2019","field":"portata","full":"0"}';
+        $expected = '{"ok":true,"response":{"method":"POST","params":{"var":"30030","datefrom":"30\/12\/2019","dateto":"31\/12\/2019","field":"portata","full":"0"}}}';
                 
         $actual = Curl::run($url, 'POST', $params, $json);
         
@@ -192,8 +192,8 @@ class CurlTest extends TestCase
      */
     public function testRunGetEquals() : void
     {
-        $url = 'http://localhost/source_tests/providers/jsonTest.php?var=30030&datefrom=30/12/2019&dateto=31/12/2019&field=portata&full=0';
-        $expected = '{"var":"30030","datefrom":"30\/12\/2019","dateto":"31\/12\/2019","field":"portata","full":"0"}';
+        $url = 'http://localhost/source_tests/providers/curlTest.php?var=30030&datefrom=30/12/2019&dateto=31/12/2019&field=portata&full=0';
+        $expected = '{"ok":true,"response":{"method":"GET","params":{"var":"30030","datefrom":"30\/12\/2019","dateto":"31\/12\/2019","field":"portata","full":"0"}}}';
         
         $actual = Curl::run($url);
         
@@ -213,13 +213,13 @@ class CurlTest extends TestCase
             'field' => 'portata',
             'full' => '0'
         ];
-        $url = 'http://localhost/scarichi/tojson.php';
+        $url = 'http://localhost/source_tests/providers/curlTest.php?json=1';
         $json = true;
-        $expected = __DIR__ . '/../providers/curlRunTest.json';
+        $expected = '{"ok":true,"response":{"method":"POST","params":{"var":"30030","datefrom":"23\/04\/2020","dateto":"24\/04\/2020","field":"portata","full":"0"}}}';
         
         $actual = Curl::run($url, 'POST', $params, $json);
         
-        $this->assertJsonStringEqualsJsonFile($expected, $actual);
+        $this->assertJsonStringEqualsJsonString($expected, $actual);
     }
     
     /**
@@ -229,7 +229,7 @@ class CurlTest extends TestCase
     public function testRunPostException() : void
     {
         $params = [];
-        $url = 'http://localhost/scarichi/tocsv.php';
+        $url = 'http://localhost/source_tests/providers/curlTest.php';
         
         $this->expectException(\Exception::class);
         
@@ -243,7 +243,7 @@ class CurlTest extends TestCase
     public function testRunException()
     {
         
-        $url = 'http://localhost/scarichi/tocsv.php';
+        $url = 'http://localhost/source_tests/providers/curlTest.php';
         $method = 'POST';
         $params = [];
         
@@ -347,7 +347,7 @@ class CurlTest extends TestCase
             'field' => 'portata',
             'full' => '0'
         ];
-        $url = 'http://localhost/scarichi/tocsv.php';
+        $url = 'http://localhost/source_tests/providers/curlTest.php';
         
         $actual = Curl::set($url, 'POST', $params);
         
@@ -366,7 +366,7 @@ class CurlTest extends TestCase
      */
     public function testSetGetIsResource()
     {
-        $url = 'http://localhost/scarichi/tocsv.php';
+        $url = 'http://localhost/source_tests/providers/curlTest.php';
         
         $actual = Curl::set($url, 'GET');
         
@@ -454,7 +454,7 @@ class CurlTest extends TestCase
     public function testSetPostException() : void
     {
         $params = [];
-        $url = 'http://localhost/scarichi/tocsv.php';
+        $url = 'http://localhost/source_tests/providers/curlTest.php';
         
         $this->expectException(\Exception::class);
         
@@ -468,7 +468,7 @@ class CurlTest extends TestCase
      */
     public function testExecContainsString($ch) : void
     {
-        $response = 'Elaborazione dati <b>Portata<\/b> variabile <b>30030<\/b> dal <b>30\/12\/2019<\/b> al <b>31\/12\/2019<\/b> avvenuta con successo in <b>|<\/b>. Nessun file CSV <b>senza zeri<\/b> esportato per mancanza di dati. (tocsv@' . SITPIT_HOST . ')';
+        $response = '{"ok":true,"response":{"method":"POST","params":{"var":"30030","datefrom":"30\/12\/2019","dateto":"31\/12\/2019","field":"portata","full":"0"}}}';
         
         $expecteds = explode('|', $response);
         

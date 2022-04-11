@@ -55,7 +55,7 @@ class Utility
      * @param array|string $functionName
      * @return string
      */
-    public static function callback(array|string $functionName, array $params) : mixed
+    public static function callback( $functionName, array $params)
     {
         try {
             if (is_callable($functionName)) {
