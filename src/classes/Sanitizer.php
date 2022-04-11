@@ -19,13 +19,15 @@ class Sanitizer
 {
     /**
      * @param string $var_name
-     * @param int $filter
-     * @param array|int $options
+     * @param int $filterRaw
+     * @param array|int $optionsRaw
      * @return string
      */
-    public static function inputGet(string $var_name, ?int $filter = FILTER_DEFAULT, ?int $options = 0) : string
+    public static function inputGet(string $var_name, ?int $filterRaw = null, ?int $optionsRaw = null) : string
     {
         try {
+            $filter = $filterRaw ?? FILTER_DEFAULT;
+            $options = $optionsRaw ?? 0;
             $response = filter_input(INPUT_GET, $var_name, $filter, $options);            
             if (is_null($response)) {
                 throw new \Exception('Parametro ' . $var_name . ' neccessario.');

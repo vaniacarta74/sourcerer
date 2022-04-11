@@ -170,7 +170,24 @@ class UtilityTest extends TestCase
      */
     public function testCallbackMethodEqualsD() : void  
     {        
-        $method = array($this->callbackObj, 'myParamMethod');
+        $method = array($this->callbackObj, 'myPublicMethodWithParams');
+        
+        $param = 'Hello World Param!';
+        
+        $expected = 'Hello World Param!';
+        
+        $actual = Utility::callback($method, array($param));
+        
+        $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * @group utility
+     * @covers \vaniacarta74\Sourcerer\api\Utility::callback
+     */
+    public function testCallbackMethodEqualsE() : void  
+    {        
+        $method = '\vaniacarta74\Sourcerer\tests\classes\Callback::myStaticMethodWithParams';
         
         $param = 'Hello World Param!';
         

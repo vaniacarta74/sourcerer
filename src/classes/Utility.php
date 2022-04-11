@@ -49,33 +49,7 @@ class Utility
             Error::printErrorInfo(__FUNCTION__, Error::debugLevel());
             throw $e;
         }
-    }
-    
-    /**     
-     * @param string $paramName
-     * @return string
-     */
-    public static function convertUrl(string $paramName) : string
-    {
-        try {
-            $paramValue = Sanitizer::inputGet($paramName);
-            $uri = Sanitizer::inputServer('REQUEST_URI');
-            $self = Sanitizer::inputServer('PHP_SELF');
-            
-            if ($paramValue) {        
-                $taditional = $self . '?' . $paramName . '=' . $paramValue;        
-                $restful = 'api/' . $paramValue . '/#';
-                $url = str_replace($taditional, $restful, $uri);
-            } else {    
-                $url = $uri;
-            }
-            return strtok($url, '#');
-            
-        } catch (\Throwable $e) {        
-            Error::printErrorInfo(__FUNCTION__, Error::debugLevel());
-            throw $e;        
-        }
-    }   
+    }    
     
     /**     
      * @param array|string $functionName

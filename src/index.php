@@ -3,12 +3,12 @@ namespace vaniacarta74\Sourcerer;
 
 use vaniacarta74\Sourcerer\api\Router;
 use vaniacarta74\Sourcerer\api\Error;
-use vaniacarta74\Sourcerer\api\Utility;
+use vaniacarta74\Sourcerer\api\Tools;
 
 require __DIR__ . '/../vendor/autoload.php';
 
 try {    
-    $resource = Utility::convertUrl('file');
+    $resource = Tools::convertUrl('file');
     
     $router = new Router($resource); 
     $route = $router->getRoute();  

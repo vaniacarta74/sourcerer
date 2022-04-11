@@ -18,11 +18,15 @@ class Callback {
         return 'Hello World Static!';
     }
     
+    public static function myStaticMethodWithParams($param) {
+        return $param;
+    }
+    
     public function myPublicMethod() {
         return 'Hello World Public!';
     }
     
-    public function myParamMethod($param) {
+    public function myPublicMethodWithParams($param) {
         return $param;    
     }
 }

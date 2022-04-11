@@ -9,6 +9,7 @@ namespace vaniacarta74\Sourcerer\tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use vaniacarta74\Sourcerer\api\Sanitizer;
+use vaniacarta74\Sourcerer\api\Curl;
 
 /**
  * Description of SanitizerTest
@@ -24,13 +25,22 @@ class SanitizerTest extends TestCase
      */
     public function inputGetProvider()
     {
-        $data = [
+        $data = [            
             'only var name' => [
-                'var_name' => 'file',
-                'filter' => null,
-                'options' => null,
-                'expected' => 'pippo'
-            ]
+                'url' => 'http://localhost/source_tests/providers/sanitizerTest.php',
+                'method' => 'GET',
+                'params' => [
+                    'file' => 'telecontrollo_classico',
+                    'var_name' => 'file',
+                    'filter' => null,
+                    'options' => null
+                ],
+                'json' => false,
+                'expected' => '{
+                    "ok": true,
+                    "response": "telecontrollo_classico"                    
+                }'
+            ],
         ];
         
         return $data;
@@ -41,11 +51,17 @@ class SanitizerTest extends TestCase
      * @covers \vaniacarta74\Sourcerer\api\Sanitizer::inputGet
      * @dataProvider inputGetProvider
      */    
-    public function testInputGetEqual(string $var_name, ?int $filter, ?int $options, string $expected)
+    public function testInputGetEqual(string $url, string $method, array $params, bool $isJson, string $expected)
     {
-        $actual = Sanitizer::inputGet($var_name, $filter, $options);
-                
-        $this->assertEqual($expected, $actual);
+        $query = http_build_query($params);
+        
+        var_dump($query);
+        
+        $queryUrl = $url . '?' . $query;
+        
+        $actual = Curl::run($queryUrl, $method, $params, $isJson);
+        
+        $this->assertJsonStringEqualsJsonString($expected, $actual);
     }
     
     /**
