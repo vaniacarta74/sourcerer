@@ -9,9 +9,8 @@ namespace vaniacarta74\Sourcerer\tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use vaniacarta74\Sourcerer\api\Utility;
+use vaniacarta74\Sourcerer\tests\classes\Callback;
 
-
-//require_once '../providers/functions.php';
 /**
  * Description of UtilityTest
  *
@@ -19,7 +18,19 @@ use vaniacarta74\Sourcerer\api\Utility;
  */
 class UtilityTest extends TestCase
 {
-            
+    
+    private $callbackObj;
+    
+    protected function setUp() : void
+    {
+        $this->callbackObj = new Callback();
+    }
+    
+    protected function tearDown() : void
+    {
+        $this->callbackObj = null;
+    }
+    
     /**
      * @group utility
      * @covers \vaniacarta74\Sourcerer\api\Utility::benchmark
@@ -32,7 +43,7 @@ class UtilityTest extends TestCase
         
         $actual = Utility::benchmark($date);
         
-        if (PHP_MAJOR_VERSION >= 7 && PHP_MINOR_VERSION >= 4) {
+        if ((PHP_MAJOR_VERSION * 10 + PHP_MINOR_VERSION)>= 81) {
             $this->assertMatchesRegularExpression('/^([1-9]\s(ora)[,]\s([1-5]?[0-9])\s(min)\s[e]\s([1-5]?[0-9])\s(sec))$/', $actual);
         } else {
             $this->assertRegExp('/^([1-9]\s(ora)[,]\s([1-5]?[0-9])\s(min)\s[e]\s([1-5]?[0-9])\s(sec))$/', $actual);
@@ -51,7 +62,7 @@ class UtilityTest extends TestCase
         
         $actual = Utility::benchmark($date);
                 
-        if (PHP_MAJOR_VERSION >= 7 && PHP_MINOR_VERSION >= 4) {
+        if ((PHP_MAJOR_VERSION * 10 + PHP_MINOR_VERSION)>= 81) {
             $this->assertMatchesRegularExpression('/^(([1-9]|[1-5][0-9])\s(min)\s[e]\s([1-5]?[0-9])\s(sec))$/', $actual);
         } else {
             $this->assertRegExp('/^(([1-9]|[1-5][0-9])\s(min)\s[e]\s([1-5]?[0-9])\s(sec))$/', $actual);
@@ -70,7 +81,7 @@ class UtilityTest extends TestCase
         
         $actual = Utility::benchmark($date);
         
-        if (PHP_MAJOR_VERSION >= 7 && PHP_MINOR_VERSION >= 4) {
+        if ((PHP_MAJOR_VERSION * 10 + PHP_MINOR_VERSION)>= 81) {
             $this->assertMatchesRegularExpression('/^(([1-5]?[0-9])[,][0-9]{3}\s(sec))$/', $actual);
         } else {
             $this->assertRegExp('/^(([1-5]?[0-9])[,][0-9]{3}\s(sec))$/', $actual);
@@ -95,7 +106,7 @@ class UtilityTest extends TestCase
      * @group utility
      * @covers \vaniacarta74\Sourcerer\api\Utility::callback
      */
-    public function testCallbackEquals() : void  
+    public function testCallbackFunctionEquals() : void  
     {        
         $funzione = 'testFunction';
         
@@ -104,6 +115,68 @@ class UtilityTest extends TestCase
         $expected = 'pippo';
         
         $actual = Utility::callback($funzione, array($params));
+        
+        $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * @group utility
+     * @covers \vaniacarta74\Sourcerer\api\Utility::callback
+     */
+    public function testCallbackMethodEqualsA() : void  
+    {        
+        $method = array($this->callbackObj, 'myStaticMethod');
+        
+        $expected = 'Hello World Static!';
+        
+        $actual = Utility::callback($method, array());
+        
+        $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * @group utility
+     * @covers \vaniacarta74\Sourcerer\api\Utility::callback
+     */
+    public function testCallbackMethodEqualsB() : void  
+    {        
+        $method = array($this->callbackObj, 'myPublicMethod');
+        
+        $expected = 'Hello World Public!';
+        
+        $actual = Utility::callback($method, array());
+        
+        $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * @group utility
+     * @covers \vaniacarta74\Sourcerer\api\Utility::callback
+     */
+    public function testCallbackMethodEqualsC() : void  
+    {        
+        $method = '\vaniacarta74\Sourcerer\tests\classes\Callback::myStaticMethod';
+        
+        $expected = 'Hello World Static!';
+        
+        $actual = Utility::callback($method, array());
+        
+        $this->assertEquals($expected, $actual);
+    }
+    
+    /**
+     * @group utility
+     * @covers \vaniacarta74\Sourcerer\api\Utility::callback
+     */
+    public function testCallbackMethodEqualsD() : void  
+    {        
+        $method = array($this->callbackObj, 'myParamMethod');
+        
+        $param = 'Hello World Param!';
+        
+        $expected = 'Hello World Param!';
+        
+        $actual = Utility::callback($method, array($param));
         
         $this->assertEquals($expected, $actual);
     }
