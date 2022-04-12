@@ -20,15 +20,14 @@ class Tools {
      * @param string $paramName
      * @return string
      */
-    public static function convertUrl(string $paramName) : string
+    public static function convertUrl(string $paramName, Sanitizer $sanitizer) : string
     {
         try {
-            $sanitizer = new Sanitizer();
             $paramValue = $sanitizer->filterGet($paramName);
-            $uri = $sanitizer->filterServer('REQUEST_URI');
-            $self = $sanitizer->filterServer('PHP_SELF');
+            $uri = $sanitizer->filterServer('REQUEST_URI');            
             
-            if ($paramValue) {        
+            if ($paramValue) {
+                $self = $sanitizer->filterServer('PHP_SELF');
                 $taditional = $self . '?' . $paramName . '=' . $paramValue;        
                 $restful = 'api/' . $paramValue . '/#';
                 $url = str_replace($taditional, $restful, $uri);

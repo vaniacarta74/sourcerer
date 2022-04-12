@@ -26,12 +26,19 @@ class SanitizerTest extends TestCase
     public function filterGetProvider() : array
     {
         $data = [
-            'telecontrollo_classico' => [
+            'telecontrollo classico' => [
                 'paramName' => 'file',
                 'filter' => FILTER_DEFAULT,
                 'option' => 0,
                 'paramValue' => 'telecontrollo_classico',
                 'expected' => 'telecontrollo_classico'
+            ],
+            'return null' => [
+                'paramName' => 'file',
+                'filter' => FILTER_DEFAULT,
+                'option' => 0,
+                'paramValue' => null,
+                'expected' => null
             ]
         ];
         
@@ -44,7 +51,7 @@ class SanitizerTest extends TestCase
      * @covers \vaniacarta74\Sourcerer\api\Sanitizer::filterInput
      * @dataProvider filterGetProvider
      */
-    public function testFilterGetEquals(string $paramName, int $filterRaw, int $optionsRaw, string $paramValue, string $expected) : void
+    public function testFilterGetEquals(string $paramName, int $filterRaw, int $optionsRaw, ?string $paramValue, ?string $expected) : void
     {
                 
         $mock = $this->getMockBuilder('\vaniacarta74\Sourcerer\api\Sanitizer')
@@ -75,23 +82,9 @@ class SanitizerTest extends TestCase
     public function filterGetExceptionProvider() : array
     {
         $data = [
-            'option out of range' => [
+                'return false' => [
                 'paramName' => 'file',
-                'filter' => FILTER_DEFAULT,
-                'option' => -1,
-                'paramValue' => 'telecontrollo_classico',
-                'expected' => 'telecontrollo_classico'
-            ],
-            'return null' => [
-                'paramName' => 'file',
-                'filter' => FILTER_DEFAULT,
-                'option' => 0,
-                'paramValue' => null,
-                'expected' => 'telecontrollo_classico'
-            ],
-            'return false' => [
-                'paramName' => 'file',
-                'filter' => FILTER_VALIDATE_BOOL,
+                'filter' => FILTER_VALIDATE_BOOLEAN,
                 'option' => 0,
                 'paramValue' => 'telecontrollo_classico',
                 'expected' => 'telecontrollo_classico'
@@ -137,14 +130,14 @@ class SanitizerTest extends TestCase
     public function filterServerProvider() : array
     {
         $data = [
-            'request_uri' => [
+            'request uri' => [
                 'paramName' => 'REQUEST_URI',
                 'filter' => FILTER_DEFAULT,
                 'option' => 0,
                 'paramValue' => 'telecontrollo_classico',
                 'expected' => 'telecontrollo_classico'
             ],
-            'php_self' => [
+            'php self' => [
                 'paramName' => 'PHP_SELF',
                 'filter' => FILTER_DEFAULT,
                 'option' => 0,
@@ -209,7 +202,7 @@ class SanitizerTest extends TestCase
             ],
             'return false' => [
                 'paramName' => 'PHP_SELF',
-                'filter' => FILTER_VALIDATE_BOOL,
+                'filter' => FILTER_VALIDATE_BOOLEAN,
                 'option' => 0,
                 'paramValue' => 'telecontrollo_classico',
                 'expected' => 'telecontrollo_classico'

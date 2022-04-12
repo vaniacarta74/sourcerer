@@ -37,14 +37,14 @@ class Sanitizer
      * @param array|int $optionsRaw
      * @return string
      */
-    public function filterGet(string $paramName, ?int $filterRaw = null, ?int $optionsRaw = null) : string
+    public function filterGet(string $paramName, ?int $filterRaw = null, ?int $optionsRaw = null)
     {
         try {
             $filter = $filterRaw ?? FILTER_DEFAULT;
             $options = $optionsRaw ?? 0;
             $response = $this->filterInput(INPUT_GET, $paramName, $filter, $options);
             if (is_null($response)) {
-                throw new \Exception('Parametro ' . $paramName . ' neccessario.');
+                return null;
             } elseif (!$response) {
                 throw new \Exception('Filtraggio valore parametro ' . $paramName . ' fallito.');
             } else {
