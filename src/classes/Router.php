@@ -27,11 +27,13 @@ class Router extends Accessor
     public function __construct(string $resource)
     {
         try {            
-            $this->setRoute($resource, ROUTES);
+            $this->setRoute($resource, ROUTES);        
+        // @codeCoverageIgnoreStart    
         } catch (\Exception $e) {
             Error::printErrorInfo(__FUNCTION__, Error::debugLevel());
             throw $e;
         }
+        // @codeCoverageIgnoreEnd
     }
     
     /**
@@ -40,7 +42,7 @@ class Router extends Accessor
      * @return boolean
      * @throws \Exception
      */
-    private function setRoute(string $resource, array $routes)
+    private function setRoute(string $resource, array $routes) : bool
     {
         try {
             $isOk = false;

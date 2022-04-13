@@ -25,11 +25,11 @@ class Tools {
         try {
             $paramValue = $sanitizer->filterGet($paramName);
             $uri = $sanitizer->filterServer('REQUEST_URI');            
-            
+           
             if ($paramValue) {
                 $self = $sanitizer->filterServer('PHP_SELF');
                 $taditional = $self . '?' . $paramName . '=' . $paramValue;        
-                $restful = 'api/' . $paramValue . '/#';
+                $restful = ROOT . 'api/' . $paramValue . '/#';
                 $url = str_replace($taditional, $restful, $uri);
             } else {    
                 $url = $uri;

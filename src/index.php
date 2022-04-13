@@ -14,7 +14,7 @@ try {
     $router = new Router($resource); 
     $route = $router->getRoute();  
     
-    header('Location: http://' . SITPIT_HOST . $route);
+    header('Location: http://' . SITPIT_HOST . ROOT . $route);
     
 } catch (\Exception $e) {
     Error::errorHandler($e, DEBUG_LEVEL, 'html');

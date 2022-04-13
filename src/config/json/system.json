@@ -2,5 +2,6 @@
     "timeout": 7200,
     "memory_limit": "2048M",
     "debug_level": 2,
+    "root": "/source/",
     "error_log": "sourcerer.git/log/error.log"
 }

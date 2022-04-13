@@ -56,7 +56,7 @@ class ToolsTest extends TestCase
                         '/sourcerer/sourcerer.git/src/index.php'
                     ]
                 ],
-                'expected' => 'api/telecontrollo_classico/'
+                'expected' => '/source/api/telecontrollo_classico/'
             ]
         ];
         

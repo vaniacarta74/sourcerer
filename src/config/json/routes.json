@@ -1,6 +1,6 @@
 {
     "telecontrollo_classico": {
-        "route": "/source/telecontrollo_classico.php",
+        "route": "telecontrollo_classico.php",
         "params": {
             "local": "/telecontrollo/index.asp?MM_Logoutnow=1",
             "remote": "/telecontrollo/index.php"
