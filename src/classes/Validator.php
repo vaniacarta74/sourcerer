@@ -17,15 +17,15 @@ use vaniacarta74\Sourcerer\api\Error;
 class Validator
 {
     /**
-     * @param string $var_name
+     * @param string $varName
      * @return mixed
      */
-    public static function validateHostName(string $var_name) : string
+    public static function validateHostName(string $varName) : string
     {
         try {
-            $response = filter_var($var_name, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME);
+            $response = filter_var($varName, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME);
             if (!$response) {
-                throw new \Exception('Validazione nome Host ' . $var_name . ' fallito.');
+                throw new \Exception('Validazione nome Host ' . $varName . ' fallito.');
             } else {
                 return $response;
             }
@@ -36,15 +36,15 @@ class Validator
     }
     
     /**
-     * @param string $var_name
+     * @param string $varName
      * @return mixed
      */
-    public static function validateIPv4(string $var_name) : string
+    public static function validateIPv4(string $varName) : string
     {
         try {
-            $response = filter_var($var_name, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4);
+            $response = filter_var($varName, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4);
             if (!$response) {
-                throw new \Exception('Validazione IPv4 ' . $var_name . ' fallito.');
+                throw new \Exception('Validazione IPv4 ' . $varName . ' fallito.');
             } else {
                 return $response;
             }

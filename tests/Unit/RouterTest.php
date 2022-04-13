@@ -132,7 +132,6 @@ class RouterTest extends TestCase
     {
         $this->expectException(\Exception::class);
         
-        Reflections::invokeMethod($this->router, 'setRoute', array($resource, $routes));
-        
+        Reflections::invokeMethod($this->router, 'setRoute', array($resource, $routes));        
     }
 }

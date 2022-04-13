@@ -15,6 +15,7 @@ $system = json_decode($systemJson, true);
 define('TIMEOUT', $system['timeout']);
 define('DEBUG_LEVEL', $system['debug_level']);
 define('ROOT', $system['root']);
+define('JOOMLA_ROOT', $system['joomla_root']);
 define('ERROR_LOG', __DIR__ . '/../../../' . $system['error_log']);
 
 ini_set('memory_limit', $system['memory_limit']);
