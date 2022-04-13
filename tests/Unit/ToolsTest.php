@@ -113,7 +113,44 @@ class ToolsTest extends TestCase
                     ]
                 ],
                 'expected' => '/source/api/telecontrollo_classico/'
-            ],
+            ]
+        ];
+        
+        return $data;
+    }
+    
+    /**
+     * @group sanitizer
+     * @covers \vaniacarta74\Sourcerer\api\Tools::convertUrl
+     * @dataProvider convertUrlProviderB
+     */
+    public function testConvertUrlEqualsB(string $paramName, array $sanitizer, string $expected) : void
+    {
+                
+        $mock = $this->getMockBuilder('\vaniacarta74\Sourcerer\api\Sanitizer')
+                    ->setMethods(['filterGet', 'filterServer'])
+                    ->getMock();                    
+
+        $mock->method('filterGet')
+            ->with($sanitizer['params'][0])
+            ->willReturn($sanitizer['returns'][0]);
+        
+        $mock->method('filterServer')
+            ->with($sanitizer['params'][1])
+            ->willReturn($sanitizer['returns'][1]);
+    
+        $actual = Tools::convertUrl($paramName, $mock); 
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * @group sanitizer
+     * @coversNothing
+     */
+    public function convertUrlExceptionProvider() : array
+    {
+        $data = [
             'classic url no param' => [
                 'paramName' => 'file',
                 'sanitizer' => [
@@ -136,95 +173,24 @@ class ToolsTest extends TestCase
     /**
      * @group sanitizer
      * @covers \vaniacarta74\Sourcerer\api\Tools::convertUrl
-     * @dataProvider convertUrlProviderB
+     * @dataProvider convertUrlExceptionProvider
      */
-    public function testConvertUrlEqualsB(string $paramName, array $sanitizer, string $expected) : void
+    public function testConvertUrlException(string $paramName, array $sanitizer, string $expected) : void
     {
-                
+        $this->expectException(\Exception::class);
+        
         $mock = $this->getMockBuilder('\vaniacarta74\Sourcerer\api\Sanitizer')
                     ->setMethods(['filterGet', 'filterServer'])
                     ->getMock();                    
 
         $mock->method('filterGet')
-            ->with(
-                $sanitizer['params'][0]
-            )
-            ->willReturn(
-                $sanitizer['returns'][0]
-            );
+            ->with($sanitizer['params'][0])
+            ->willReturn($sanitizer['returns'][0]);
         
         $mock->method('filterServer')
-            ->with(
-                $sanitizer['params'][1]
-            )
-            ->willReturn(
-                $sanitizer['returns'][1]
-            );
+            ->with($sanitizer['params'][1])
+            ->willReturn($sanitizer['returns'][1]);
     
-        $actual = Tools::convertUrl($paramName, $mock); 
-
-        $this->assertEquals($expected, $actual);
-    }
-
-    /**
-     * @group sanitizer
-     * @coversNothing
-     */
-    public function convertUrlExceptionProvider() : array
-    {
-        $data = [
-            'option out of range' => [
-                'paramName' => 'file',
-                'filter' => FILTER_DEFAULT,
-                'option' => -1,
-                'paramValue' => 'telecontrollo_classico',
-                'expected' => 'telecontrollo_classico'
-            ],
-            'return null' => [
-                'paramName' => 'file',
-                'filter' => FILTER_DEFAULT,
-                'option' => 0,
-                'paramValue' => null,
-                'expected' => 'telecontrollo_classico'
-            ],
-            'return false' => [
-                'paramName' => 'file',
-                'filter' => FILTER_VALIDATE_BOOLEAN,
-                'option' => 0,
-                'paramValue' => 'telecontrollo_classico',
-                'expected' => 'telecontrollo_classico'
-            ]
-        ];
-        
-        return $data;
-    }
-    
-    /**
-     * @group sanitizer
-     * @covers \vaniacarta74\Sourcerer\api\Tools::convertUrl
-     * @covers \vaniacarta74\Sourcerer\api\Tools::filterInput
-     * @dataProvider convertUrlExceptionProvider
-     */
-    public function FilterGetExceptionEquals(string $paramName, int $filterRaw, int $optionsRaw, ?string $paramValue) : void
-    {
-        $this->expectException(\Exception::class);
-        
-        $mock = $this->getMockBuilder('\vaniacarta74\Sourcerer\api\Sanitizer')
-                    ->setMethods(['filterInput'])
-                    ->getMock();
-        
-        $mock->method('filterInput')
-            ->with(INPUT_GET, $paramName, $filterRaw, $optionsRaw)
-            ->willReturnCallback(function() use ($paramName, $filterRaw, $optionsRaw) {
-                if (!isset($_GET[$paramName])) {
-                    return null;
-                }
-                $filter = $filterRaw ?? FILTER_DEFAULT;
-                $options = $optionsRaw ?? 0;
-                return filter_var($_GET[$paramName], $filter, $options);
-            });
-
-        $_GET[$paramName] = $paramValue;
-        $mock->convertUrl($paramName, $filterRaw, $optionsRaw); 
+        Tools::convertUrl($paramName, $mock);
     }
 }

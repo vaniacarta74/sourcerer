@@ -33,8 +33,14 @@ class Tools {
                 $url = str_replace($taditional, $restful, $uri);
             } else {    
                 $url = $uri;
+            }            
+            $response = strtok($url, '#');            
+            
+            if (!preg_match('/^(.*\/)*$/', $response)) {
+                throw new \Exception('Formato url inaspettato');
+            } else {
+                return $response;
             }
-            return strtok($url, '#');
             
         } catch (\Throwable $e) {        
             Error::printErrorInfo(__FUNCTION__, Error::debugLevel());
