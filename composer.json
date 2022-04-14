@@ -28,8 +28,8 @@
         ],
         "psr-4": {
             "vaniacarta74\\Sourcerer\\": "src/",            
-            "vaniacarta74\\Sourcerer\\api\\": "src/classes/",
-            "vaniacarta74\\Sourcerer\\tests\\": "tests/"
+            "vaniacarta74\\Sourcerer\\tests\\": "tests/",
+            "vaniacarta74\\Sourcerer\\web\\": "public/"
         }
     },
     "autoload-dev": {
@@ -39,8 +39,8 @@
         ],
         "psr-4": {
             "vaniacarta74\\Sourcerer\\": "src/",            
-            "vaniacarta74\\Sourcerer\\api\\": "src/classes/",
-            "vaniacarta74\\Sourcerer\\tests\\": "tests/"
+            "vaniacarta74\\Sourcerer\\tests\\": "tests/",
+            "vaniacarta74\\Sourcerer\\web\\": "public/"
         }
     }
 }

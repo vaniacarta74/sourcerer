@@ -8,7 +8,7 @@
 namespace vaniacarta74\Sourcerer\tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use vaniacarta74\Sourcerer\api\Error;
+use vaniacarta74\Sourcerer\Error;
 
 /**
  * Description of ErrorTest
@@ -18,7 +18,7 @@ use vaniacarta74\Sourcerer\api\Error;
 class ErrorTest extends TestCase
 {
     /**
-     * @covers \vaniacarta74\Sourcerer\api\Error::printErrorInfo
+     * @covers \vaniacarta74\Sourcerer\Error::printErrorInfo
      */
     public function testPrintErrorInfoOutputString() : void
     {
@@ -35,7 +35,7 @@ class ErrorTest extends TestCase
     }
     
     /**
-     * @covers \vaniacarta74\Sourcerer\api\Error::printErrorInfo
+     * @covers \vaniacarta74\Sourcerer\Error::printErrorInfo
      */
     public function testPrintErrorInfoOutputFile() : void
     {
@@ -54,7 +54,7 @@ class ErrorTest extends TestCase
     }
     
     /**
-     * @covers \vaniacarta74\Sourcerer\api\Error::printErrorInfo
+     * @covers \vaniacarta74\Sourcerer\Error::printErrorInfo
      */
     public function testPrintErrorInfoNoOutput() : void
     {
@@ -68,7 +68,7 @@ class ErrorTest extends TestCase
     }
     
     /**
-    * @covers \vaniacarta74\Sourcerer\api\Error::appendToFile
+    * @covers \vaniacarta74\Sourcerer\Error::appendToFile
     */
     public function testAppendToFileContents() : void
     {
@@ -84,7 +84,7 @@ class ErrorTest extends TestCase
     }
     
     /**
-    * @covers \vaniacarta74\Sourcerer\api\Error::appendToFile
+    * @covers \vaniacarta74\Sourcerer\Error::appendToFile
     */
     public function testAppendToFileMode() : void
     {
@@ -100,7 +100,7 @@ class ErrorTest extends TestCase
     }
     
     /**
-     * @covers \vaniacarta74\Sourcerer\api\Error::errorMsgCli
+     * @covers \vaniacarta74\Sourcerer\Error::errorMsgCli
      */
     public function testErrorMsgCliContainsString() : void
     {
@@ -117,7 +117,7 @@ class ErrorTest extends TestCase
     }
     
     /**
-     * @covers \vaniacarta74\Sourcerer\api\Error::errorMsgHtml
+     * @covers \vaniacarta74\Sourcerer\Error::errorMsgHtml
      */
     public function testErrorMsgHtmlContainsString() : void
     {
@@ -134,7 +134,7 @@ class ErrorTest extends TestCase
     }
     
     /**
-     * @covers \vaniacarta74\Sourcerer\api\Error::errorMsgJson
+     * @covers \vaniacarta74\Sourcerer\Error::errorMsgJson
      */
     public function testErrorMsgJsonContainsString() : void
     {
@@ -151,7 +151,7 @@ class ErrorTest extends TestCase
     }
     
     /**
-     * @covers \vaniacarta74\Sourcerer\api\Error::errorHandler
+     * @covers \vaniacarta74\Sourcerer\Error::errorHandler
      */
     public function testErrorHandlerNoOutput() : void
     {
@@ -169,7 +169,7 @@ class ErrorTest extends TestCase
     }
     
     /**
-     * @covers \vaniacarta74\Sourcerer\api\Error::errorHandler
+     * @covers \vaniacarta74\Sourcerer\Error::errorHandler
      */
     public function testErrorHandlerOutputFile() : void
     {
@@ -192,7 +192,7 @@ class ErrorTest extends TestCase
     }
     
     /**
-     * @covers \vaniacarta74\Sourcerer\api\Error::errorHandler
+     * @covers \vaniacarta74\Sourcerer\Error::errorHandler
      */
     public function testErrorHandlerCliOutputRegex() : void
     {
@@ -211,7 +211,7 @@ class ErrorTest extends TestCase
     }
     
     /**
-     * @covers \vaniacarta74\Sourcerer\api\Error::errorHandler
+     * @covers \vaniacarta74\Sourcerer\Error::errorHandler
      */
     public function testErrorHandlerHtmlOutputRegex() : void
     {
@@ -230,7 +230,7 @@ class ErrorTest extends TestCase
     }
     
     /**
-     * @covers \vaniacarta74\Sourcerer\api\Error::noticeMsgCli
+     * @covers \vaniacarta74\Sourcerer\Error::noticeMsgCli
      */
     public function testNoticeMsgCliContainsString() : void
     {
@@ -247,7 +247,7 @@ class ErrorTest extends TestCase
     }
     
     /**
-     * @covers \vaniacarta74\Sourcerer\api\Error::noticeMsgHtml
+     * @covers \vaniacarta74\Sourcerer\Error::noticeMsgHtml
      */
     public function testNoticeMsgHtmlContainsString() : void
     {
@@ -264,7 +264,7 @@ class ErrorTest extends TestCase
     }
     
     /**
-     * @covers \vaniacarta74\Sourcerer\api\Error::noticeMsgJson
+     * @covers \vaniacarta74\Sourcerer\Error::noticeMsgJson
      */
     public function testNoticeMsgJsonContainsString() : void
     {
@@ -281,7 +281,7 @@ class ErrorTest extends TestCase
     }
     
     /**
-     * @covers \vaniacarta74\Sourcerer\api\Error::noticeHandler
+     * @covers \vaniacarta74\Sourcerer\Error::noticeHandler
      */
     public function testNoticeHandlerNoOutput() : void
     {
@@ -299,7 +299,7 @@ class ErrorTest extends TestCase
     }
     
     /**
-     * @covers \vaniacarta74\Sourcerer\api\Error::noticeHandler
+     * @covers \vaniacarta74\Sourcerer\Error::noticeHandler
      */
     public function testNoticeHandlerOutputFile() : void
     {
@@ -319,7 +319,7 @@ class ErrorTest extends TestCase
     }
     
     /**
-     * @covers \vaniacarta74\Sourcerer\api\Error::noticeHandler
+     * @covers \vaniacarta74\Sourcerer\Error::noticeHandler
      */
     public function testNoticeHandlerCliOutputRegex() : void
     {
@@ -338,7 +338,7 @@ class ErrorTest extends TestCase
     }
     
     /**
-     * @covers \vaniacarta74\Sourcerer\api\Error::noticeHandler
+     * @covers \vaniacarta74\Sourcerer\Error::noticeHandler
      */
     public function testNoticeHandlerCliTagInputRegex() : void
     {
@@ -357,7 +357,7 @@ class ErrorTest extends TestCase
     }
     
     /**
-     * @covers \vaniacarta74\Sourcerer\api\Error::noticeHandler
+     * @covers \vaniacarta74\Sourcerer\Error::noticeHandler
      */
     public function testNoticeHandlerHtmlOutputRegex() : void
     {

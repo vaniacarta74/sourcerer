@@ -1,9 +1,9 @@
 <?php
 
-namespace vaniacarta74\Sourcerer;
+namespace vaniacarta74\Sourcerer\web;
 
-use vaniacarta74\Sourcerer\api\Error;
-use vaniacarta74\Sourcerer\api\Validator;
+use vaniacarta74\Sourcerer\Error;
+use vaniacarta74\Sourcerer\Validator;
 
 require __DIR__ . '/../vendor/autoload.php';
 

@@ -61,9 +61,9 @@ class AccessorTest extends TestCase
     
     /**
      * @group accessor
-     * @covers \vaniacarta74\Sourcerer\api\Accessor::__call
-     * @covers \vaniacarta74\Sourcerer\api\Accessor::setAccessor
-     * @covers \vaniacarta74\Sourcerer\api\Accessor::getAccessor
+     * @covers \vaniacarta74\Sourcerer\Accessor::__call
+     * @covers \vaniacarta74\Sourcerer\Accessor::setAccessor
+     * @covers \vaniacarta74\Sourcerer\Accessor::getAccessor
      * @dataProvider callProvider
      */
     public function testCallEquals(array $args, $expected) : void   
@@ -105,9 +105,9 @@ class AccessorTest extends TestCase
     
     /**
      * @group accessor
-     * @covers \vaniacarta74\Sourcerer\api\Accessor::__call
-     * @covers \vaniacarta74\Sourcerer\api\Accessor::setAccessor
-     * @covers \vaniacarta74\Sourcerer\api\Accessor::getAccessor
+     * @covers \vaniacarta74\Sourcerer\Accessor::__call
+     * @covers \vaniacarta74\Sourcerer\Accessor::setAccessor
+     * @covers \vaniacarta74\Sourcerer\Accessor::getAccessor
      * @dataProvider callExceptionProvider
      */
     public function testCallException(array $args) : void

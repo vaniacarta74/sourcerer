@@ -5,9 +5,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/PHPClass.php to edit this template
  */
 
-namespace vaniacarta74\Sourcerer\api;
+namespace vaniacarta74\Sourcerer;
 
-use vaniacarta74\Sourcerer\api\Error;
+use vaniacarta74\Sourcerer\Error;
 
 /**
  * Description of Sanitizer

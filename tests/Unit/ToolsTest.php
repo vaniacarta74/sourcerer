@@ -9,7 +9,7 @@
 namespace vaniacarta74\Sourcerer\tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use vaniacarta74\Sourcerer\api\Tools;
+use vaniacarta74\Sourcerer\Tools;
 
 
 /**
@@ -65,13 +65,13 @@ class ToolsTest extends TestCase
     
     /**
      * @group sanitizer
-     * @covers \vaniacarta74\Sourcerer\api\Tools::convertUrl
+     * @covers \vaniacarta74\Sourcerer\Tools::convertUrl
      * @dataProvider convertUrlProviderA
      */
     public function testConvertUrlEqualsA(string $paramName, array $filterInput, string $expected) : void
     {
                 
-        $mock = $this->getMockBuilder('\vaniacarta74\Sourcerer\api\Sanitizer')
+        $mock = $this->getMockBuilder('\vaniacarta74\Sourcerer\Sanitizer')
                     ->setMethods(['filterInput'])
                     ->getMock();                    
 
@@ -121,13 +121,13 @@ class ToolsTest extends TestCase
     
     /**
      * @group sanitizer
-     * @covers \vaniacarta74\Sourcerer\api\Tools::convertUrl
+     * @covers \vaniacarta74\Sourcerer\Tools::convertUrl
      * @dataProvider convertUrlProviderB
      */
     public function testConvertUrlEqualsB(string $paramName, array $sanitizer, string $expected) : void
     {
                 
-        $mock = $this->getMockBuilder('\vaniacarta74\Sourcerer\api\Sanitizer')
+        $mock = $this->getMockBuilder('\vaniacarta74\Sourcerer\Sanitizer')
                     ->setMethods(['filterGet', 'filterServer'])
                     ->getMock();                    
 
@@ -172,14 +172,14 @@ class ToolsTest extends TestCase
     
     /**
      * @group sanitizer
-     * @covers \vaniacarta74\Sourcerer\api\Tools::convertUrl
+     * @covers \vaniacarta74\Sourcerer\Tools::convertUrl
      * @dataProvider convertUrlExceptionProvider
      */
     public function testConvertUrlException(string $paramName, array $sanitizer, string $expected) : void
     {
         $this->expectException(\Exception::class);
         
-        $mock = $this->getMockBuilder('\vaniacarta74\Sourcerer\api\Sanitizer')
+        $mock = $this->getMockBuilder('\vaniacarta74\Sourcerer\Sanitizer')
                     ->setMethods(['filterGet', 'filterServer'])
                     ->getMock();                    
 

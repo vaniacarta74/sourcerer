@@ -8,7 +8,7 @@
 namespace vaniacarta74\Sourcerer\tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use vaniacarta74\Sourcerer\api\Curl;
+use vaniacarta74\Sourcerer\Curl;
 
 /**
  * Description of CurlTest
@@ -153,8 +153,8 @@ class CurlTest extends TestCase
     
     /**
      * @group curl
-     * @covers \vaniacarta74\Sourcerer\api\Curl::run
-     * @covers \vaniacarta74\Sourcerer\api\Curl::exec
+     * @covers \vaniacarta74\Sourcerer\Curl::run
+     * @covers \vaniacarta74\Sourcerer\Curl::exec
      * @dataProvider runProvider     
      */
     public function testRunEqualsJsonString($url, $method, $params, $json, $expected)
@@ -166,7 +166,7 @@ class CurlTest extends TestCase
     
     /**
      * @group curl
-     * @covers \vaniacarta74\Sourcerer\api\Curl::run
+     * @covers \vaniacarta74\Sourcerer\Curl::run
      */
     public function testRunPostEquals() : void
     {
@@ -188,7 +188,7 @@ class CurlTest extends TestCase
     
     /**
      * @group curl
-     * @covers \vaniacarta74\Sourcerer\api\Curl::run
+     * @covers \vaniacarta74\Sourcerer\Curl::run
      */
     public function testRunGetEquals() : void
     {
@@ -202,7 +202,7 @@ class CurlTest extends TestCase
     
     /**
      * @group curl
-     * @covers \vaniacarta74\Sourcerer\api\Curl::run
+     * @covers \vaniacarta74\Sourcerer\Curl::run
      */
     public function testRunJsonStringEqualsJsonFile() : void
     {
@@ -224,7 +224,7 @@ class CurlTest extends TestCase
     
     /**
      * @group curl
-     * @covers \vaniacarta74\Sourcerer\api\Curl::run
+     * @covers \vaniacarta74\Sourcerer\Curl::run
      */
     public function testRunPostException() : void
     {
@@ -238,7 +238,7 @@ class CurlTest extends TestCase
     
     /**
      * @group curl
-     * @covers \vaniacarta74\Sourcerer\api\Curl::run
+     * @covers \vaniacarta74\Sourcerer\Curl::run
      */
     public function testRunException()
     {
@@ -318,7 +318,7 @@ class CurlTest extends TestCase
     
     /**
      * @group curl
-     * @covers \vaniacarta74\Sourcerer\api\Curl::set
+     * @covers \vaniacarta74\Sourcerer\Curl::set
      * @dataProvider setProvider     
      */
     public function testSetIsResource($url, $method, $params, $json)
@@ -336,7 +336,7 @@ class CurlTest extends TestCase
         
     /**
      * @group curl
-     * @covers \vaniacarta74\Sourcerer\api\Curl::set     
+     * @covers \vaniacarta74\Sourcerer\Curl::set     
      */
     public function testSetPostIsResource()
     {
@@ -362,7 +362,7 @@ class CurlTest extends TestCase
     
     /**
      * @group curl
-     * @covers \vaniacarta74\Sourcerer\api\Curl::set     
+     * @covers \vaniacarta74\Sourcerer\Curl::set     
      */
     public function testSetGetIsResource()
     {
@@ -381,7 +381,7 @@ class CurlTest extends TestCase
     
     /**
      * @group curl
-     * @covers \vaniacarta74\Sourcerer\api\Curl::set     
+     * @covers \vaniacarta74\Sourcerer\Curl::set     
      */
     public function testSetIsJsonIsResource()
     {
@@ -437,7 +437,7 @@ class CurlTest extends TestCase
     
     /**
      * @group curl
-     * @covers \vaniacarta74\Sourcerer\api\Curl::set
+     * @covers \vaniacarta74\Sourcerer\Curl::set
      * @dataProvider setExceptionProvider
      */
     public function testSetException($url, $method, $params, $json)
@@ -449,7 +449,7 @@ class CurlTest extends TestCase
     
     /**
      * @group curl
-     * @covers \vaniacarta74\Sourcerer\api\Curl::set
+     * @covers \vaniacarta74\Sourcerer\Curl::set
      */
     public function testSetPostException() : void
     {
@@ -463,7 +463,7 @@ class CurlTest extends TestCase
     
     /**
      * @group curl
-     * @covers \vaniacarta74\Sourcerer\api\Curl::exec
+     * @covers \vaniacarta74\Sourcerer\Curl::exec
      * @depends testSetPostIsResource
      */
     public function testExecContainsString($ch) : void
@@ -481,7 +481,7 @@ class CurlTest extends TestCase
     
     /**
      * @group curl
-     * @covers \vaniacarta74\Sourcerer\api\Curl::exec
+     * @covers \vaniacarta74\Sourcerer\Curl::exec
      */
     public function testExecNullException() : void
     {

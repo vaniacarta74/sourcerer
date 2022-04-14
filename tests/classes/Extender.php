@@ -8,7 +8,7 @@
 
 namespace vaniacarta74\Sourcerer\tests\classes;
 
-use vaniacarta74\Sourcerer\api\Accessor;
+use vaniacarta74\Sourcerer\Accessor;
 
 /**
  * Description of Extender

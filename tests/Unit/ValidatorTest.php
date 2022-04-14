@@ -8,7 +8,7 @@
 namespace vaniacarta74\Sourcerer\tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use vaniacarta74\Sourcerer\api\Validator;
+use vaniacarta74\Sourcerer\Validator;
 
 /**
  * Description of ValidatorTest
@@ -39,7 +39,7 @@ class ValidatorTest extends TestCase
     
     /**
      * @group sourcerer
-     * @covers vaniacarta74\Sourcerer\api\Validator::validateHostName
+     * @covers vaniacarta74\Sourcerer\Validator::validateHostName
      * @dataProvider validateHostNameProvider
      */
     public function testValidateHostNameEquals(string $varName, string $expected) : void
@@ -66,7 +66,7 @@ class ValidatorTest extends TestCase
     
     /**
      * @group sourcerer
-     * @covers vaniacarta74\Sourcerer\api\Validator::validateHostName
+     * @covers vaniacarta74\Sourcerer\Validator::validateHostName
      * @dataProvider validateHostNameExceptionProvider
      */
     public function testValidateHostNameException(string $varName) : void
@@ -94,7 +94,7 @@ class ValidatorTest extends TestCase
     
     /**
      * @group sourcerer
-     * @covers vaniacarta74\Sourcerer\api\Validator::validateIPv4
+     * @covers vaniacarta74\Sourcerer\Validator::validateIPv4
      * @dataProvider validateIPv4Provider
      */
     public function testValidateIPv4Equals(string $varName, string $expected) : void
@@ -121,7 +121,7 @@ class ValidatorTest extends TestCase
     
     /**
      * @group sourcerer
-     * @covers vaniacarta74\Sourcerer\api\Validator::validateIPv4
+     * @covers vaniacarta74\Sourcerer\Validator::validateIPv4
      * @dataProvider validateIPv4ExceptionProvider
      */
     public function testValidateIPv4Exception(string $varName) : void

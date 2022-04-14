@@ -1,11 +1,11 @@
 <?php
 
-namespace vaniacarta74\Sourcerer;
+namespace vaniacarta74\Sourcerer\web;
 
-use vaniacarta74\Sourcerer\api\Router;
-use vaniacarta74\Sourcerer\api\Error;
-use vaniacarta74\Sourcerer\api\Tools;
-use vaniacarta74\Sourcerer\api\Sanitizer;
+use vaniacarta74\Sourcerer\Router;
+use vaniacarta74\Sourcerer\Error;
+use vaniacarta74\Sourcerer\Tools;
+use vaniacarta74\Sourcerer\Sanitizer;
 
 require __DIR__ . '/../vendor/autoload.php';
 

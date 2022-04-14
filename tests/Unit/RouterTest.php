@@ -8,7 +8,7 @@
 namespace vaniacarta74\Sourcerer\tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use vaniacarta74\Sourcerer\api\Router;
+use vaniacarta74\Sourcerer\Router;
 use vaniacarta74\Sourcerer\tests\classes\Reflections;
 
 /**
@@ -49,8 +49,8 @@ class RouterTest extends TestCase
     
     /**
      * @group sourcerer
-     * @covers vaniacarta74\Sourcerer\api\Router::__construct
-     * @covers vaniacarta74\Sourcerer\api\Router::setRoute
+     * @covers vaniacarta74\Sourcerer\Router::__construct
+     * @covers vaniacarta74\Sourcerer\Router::setRoute
      * @dataProvider constructorProvider
      */
     public function testConstructorEquals(string $resource, string $expected) : void
@@ -89,7 +89,7 @@ class RouterTest extends TestCase
     
     /**
      * @group sourcerer
-     * @covers vaniacarta74\Sourcerer\api\Router::setRoute
+     * @covers vaniacarta74\Sourcerer\Router::setRoute
      * @dataProvider setRouteProvider
      */
     public function testSetRouteEquals(string $resource, array $routes, bool $expected) : void
@@ -125,7 +125,7 @@ class RouterTest extends TestCase
     
     /**
      * @group sourcerer
-     * @covers vaniacarta74\Sourcerer\api\Router::setRoute
+     * @covers vaniacarta74\Sourcerer\Router::setRoute
      * @dataProvider setRouteExceptionProvider
      */
     public function testSetRouteException(string $resource, array $routes) : void

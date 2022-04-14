@@ -6,10 +6,10 @@
  * and open the template in the editor.
  */
 
-namespace vaniacarta74\Sourcerer\api;
+namespace vaniacarta74\Sourcerer;
 
-use vaniacarta74\Sourcerer\api\Accessor;
-use vaniacarta74\Sourcerer\api\Error;
+use vaniacarta74\Sourcerer\Accessor;
+use vaniacarta74\Sourcerer\Error;
 
 /**
  * Description of Router

@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-namespace vaniacarta74\Sourcerer\api;
+namespace vaniacarta74\Sourcerer;
 
 /**
  * Classe gestione errori.

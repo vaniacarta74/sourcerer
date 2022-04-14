@@ -47,14 +47,14 @@ class SanitizerTest extends TestCase
     
     /**
      * @group sanitizer
-     * @covers \vaniacarta74\Sourcerer\api\Sanitizer::filterGet
-     * @covers \vaniacarta74\Sourcerer\api\Sanitizer::filterInput
+     * @covers \vaniacarta74\Sourcerer\Sanitizer::filterGet
+     * @covers \vaniacarta74\Sourcerer\Sanitizer::filterInput
      * @dataProvider filterGetProvider
      */
     public function testFilterGetEquals(string $paramName, int $filterRaw, int $optionsRaw, ?string $paramValue, ?string $expected) : void
     {
                 
-        $mock = $this->getMockBuilder('\vaniacarta74\Sourcerer\api\Sanitizer')
+        $mock = $this->getMockBuilder('\vaniacarta74\Sourcerer\Sanitizer')
                     ->setMethods(['filterInput'])
                     ->getMock();
         
@@ -96,15 +96,15 @@ class SanitizerTest extends TestCase
     
     /**
      * @group sanitizer
-     * @covers \vaniacarta74\Sourcerer\api\Sanitizer::filterGet
-     * @covers \vaniacarta74\Sourcerer\api\Sanitizer::filterInput
+     * @covers \vaniacarta74\Sourcerer\Sanitizer::filterGet
+     * @covers \vaniacarta74\Sourcerer\Sanitizer::filterInput
      * @dataProvider filterGetExceptionProvider
      */
     public function testFilterGetExceptionEquals(string $paramName, int $filterRaw, int $optionsRaw, ?string $paramValue) : void
     {
         $this->expectException(\Exception::class);
         
-        $mock = $this->getMockBuilder('\vaniacarta74\Sourcerer\api\Sanitizer')
+        $mock = $this->getMockBuilder('\vaniacarta74\Sourcerer\Sanitizer')
                     ->setMethods(['filterInput'])
                     ->getMock();
         
@@ -151,14 +151,14 @@ class SanitizerTest extends TestCase
     
     /**
      * @group sanitizer
-     * @covers \vaniacarta74\Sourcerer\api\Sanitizer::filterServer
-     * @covers \vaniacarta74\Sourcerer\api\Sanitizer::filterInput
+     * @covers \vaniacarta74\Sourcerer\Sanitizer::filterServer
+     * @covers \vaniacarta74\Sourcerer\Sanitizer::filterInput
      * @dataProvider filterServerProvider
      */
     public function testFilterServerEquals(string $paramName, int $filterRaw, int $optionsRaw, string $paramValue, string $expected) : void
     {
                 
-        $mock = $this->getMockBuilder('\vaniacarta74\Sourcerer\api\Sanitizer')
+        $mock = $this->getMockBuilder('\vaniacarta74\Sourcerer\Sanitizer')
                     ->setMethods(['filterInput'])
                     ->getMock();
         
@@ -214,15 +214,15 @@ class SanitizerTest extends TestCase
     
     /**
      * @group sanitizer
-     * @covers \vaniacarta74\Sourcerer\api\Sanitizer::filterServer
-     * @covers \vaniacarta74\Sourcerer\api\Sanitizer::filterInput
+     * @covers \vaniacarta74\Sourcerer\Sanitizer::filterServer
+     * @covers \vaniacarta74\Sourcerer\Sanitizer::filterInput
      * @dataProvider filterServerExceptionProvider
      */
     public function testFilterServerExceptionEquals(string $paramName, int $filterRaw, int $optionsRaw, ?string $paramValue) : void
     {
         $this->expectException(\Exception::class);
         
-        $mock = $this->getMockBuilder('\vaniacarta74\Sourcerer\api\Sanitizer')
+        $mock = $this->getMockBuilder('\vaniacarta74\Sourcerer\Sanitizer')
                     ->setMethods(['filterInput'])
                     ->getMock();
         

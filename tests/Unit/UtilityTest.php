@@ -8,7 +8,7 @@
 namespace vaniacarta74\Sourcerer\tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use vaniacarta74\Sourcerer\api\Utility;
+use vaniacarta74\Sourcerer\Utility;
 use vaniacarta74\Sourcerer\tests\classes\Callback;
 
 /**
@@ -33,7 +33,7 @@ class UtilityTest extends TestCase
     
     /**
      * @group utility
-     * @covers \vaniacarta74\Sourcerer\api\Utility::benchmark
+     * @covers \vaniacarta74\Sourcerer\Utility::benchmark
      */
     public function testBenchmarkOraEquals() : void
     {
@@ -52,7 +52,7 @@ class UtilityTest extends TestCase
     
     /**
      * @group utility
-     * @covers \vaniacarta74\Sourcerer\api\Utility::benchmark
+     * @covers \vaniacarta74\Sourcerer\Utility::benchmark
      */
     public function testBenchmarkMinEquals() : void
     {
@@ -71,7 +71,7 @@ class UtilityTest extends TestCase
     
     /**
      * @group utility
-     * @covers \vaniacarta74\Sourcerer\api\Utility::benchmark
+     * @covers \vaniacarta74\Sourcerer\Utility::benchmark
      */
     public function testBenchmarkSecEquals() : void
     {
@@ -91,7 +91,7 @@ class UtilityTest extends TestCase
     
     /**
      * @group utility
-     * @covers \vaniacarta74\Sourcerer\api\Utility::benchmark
+     * @covers \vaniacarta74\Sourcerer\Utility::benchmark
      */
     public function testBenchmarkException() : void
     {
@@ -104,7 +104,7 @@ class UtilityTest extends TestCase
     
     /**
      * @group utility
-     * @covers \vaniacarta74\Sourcerer\api\Utility::callback
+     * @covers \vaniacarta74\Sourcerer\Utility::callback
      */
     public function testCallbackFunctionEquals() : void  
     {        
@@ -121,7 +121,7 @@ class UtilityTest extends TestCase
     
     /**
      * @group utility
-     * @covers \vaniacarta74\Sourcerer\api\Utility::callback
+     * @covers \vaniacarta74\Sourcerer\Utility::callback
      */
     public function testCallbackMethodEqualsA() : void  
     {        
@@ -136,7 +136,7 @@ class UtilityTest extends TestCase
     
     /**
      * @group utility
-     * @covers \vaniacarta74\Sourcerer\api\Utility::callback
+     * @covers \vaniacarta74\Sourcerer\Utility::callback
      */
     public function testCallbackMethodEqualsB() : void  
     {        
@@ -151,7 +151,7 @@ class UtilityTest extends TestCase
     
     /**
      * @group utility
-     * @covers \vaniacarta74\Sourcerer\api\Utility::callback
+     * @covers \vaniacarta74\Sourcerer\Utility::callback
      */
     public function testCallbackMethodEqualsC() : void  
     {        
@@ -166,7 +166,7 @@ class UtilityTest extends TestCase
     
     /**
      * @group utility
-     * @covers \vaniacarta74\Sourcerer\api\Utility::callback
+     * @covers \vaniacarta74\Sourcerer\Utility::callback
      */
     public function testCallbackMethodEqualsD() : void  
     {        
@@ -183,7 +183,7 @@ class UtilityTest extends TestCase
     
     /**
      * @group utility
-     * @covers \vaniacarta74\Sourcerer\api\Utility::callback
+     * @covers \vaniacarta74\Sourcerer\Utility::callback
      */
     public function testCallbackMethodEqualsE() : void  
     {        
@@ -200,7 +200,7 @@ class UtilityTest extends TestCase
     
     /**
      * @group utility
-     * @covers \vaniacarta74\Sourcerer\api\Utility::callback
+     * @covers \vaniacarta74\Sourcerer\Utility::callback
      */
     public function testCallbackException() : void
     {
