@@ -4,5 +4,5 @@
     "debug_level": 2,
     "root": "/source/",
     "joomla_root": "/joomla/", 
-    "error_log": "sourcerer.git/log/error.log"
+    "error_log": "sourcerer.git/resource/log/error.log"
 }
