@@ -1,4 +1,5 @@
 <?php
+
 namespace vaniacarta74\Sourcerer\config;
 
 require_once('php_Sourcerer.inc.php');

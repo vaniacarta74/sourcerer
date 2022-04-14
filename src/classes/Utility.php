@@ -1,4 +1,5 @@
 <?php
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -26,7 +27,7 @@ class Utility
      * @param string $strDateTime Data nel formato "YYYY-mm-dd HH:ii:ss.millisec"
      * @return string Intervallo intercorso nel formato "secondi,millisecondi"
      */
-    public static function benchmark(string $strDateTime) : string
+    public static function benchmark(string $strDateTime): string
     {
         try {
             $start = \dateTime::createFromFormat('Y-m-d H:i:s.u', $strDateTime, new \DateTimeZone('Europe/Rome'));
@@ -34,7 +35,7 @@ class Utility
                 throw new \Exception('Data inizio benchmark inesistente');
             }
             $end = new \DateTime('NOW', new \DateTimeZone('Europe/Rome'));
-            $dateInterval = date_diff($start, $end);            
+            $dateInterval = date_diff($start, $end);
             if ($dateInterval->h === 0) {
                 if ($dateInterval->i === 0) {
                     $interval = substr($dateInterval->format('%s,%F'), 0, -3) . ' sec';
@@ -49,24 +50,24 @@ class Utility
             Error::printErrorInfo(__FUNCTION__, Error::debugLevel());
             throw $e;
         }
-    }    
-    
-    /**     
+    }
+
+    /**
      * @param array|string $functionName
      * @return string
      */
-    public static function callback( $functionName, array $params)
+    public static function callback($functionName, array $params)
     {
         try {
             if (is_callable($functionName)) {
                 $result = call_user_func_array($functionName, $params);
             } else {
                 throw new \Exception('Funzione inesistente');
-            }        
+            }
             return $result;
-        } catch (\Throwable $e) {        
+        } catch (\Throwable $e) {
             Error::printErrorInfo(__FUNCTION__, Error::debugLevel());
-            throw $e;        
+            throw $e;
         }
     }
 }

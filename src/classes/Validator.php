@@ -20,7 +20,7 @@ class Validator
      * @param string $varName
      * @return mixed
      */
-    public static function validateHostName(string $varName) : string
+    public static function validateHostName(string $varName): string
     {
         try {
             $response = filter_var($varName, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME);
@@ -34,12 +34,12 @@ class Validator
             throw $e;
         }
     }
-    
+
     /**
      * @param string $varName
      * @return mixed
      */
-    public static function validateIPv4(string $varName) : string
+    public static function validateIPv4(string $varName): string
     {
         try {
             $response = filter_var($varName, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4);

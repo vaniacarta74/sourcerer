@@ -19,30 +19,30 @@ use vaniacarta74\Sourcerer\api\Error;
 class Router extends Accessor
 {
     protected $route;
-        
+
     /**
      * @param string $resource
      * @throws \Exception
      */
     public function __construct(string $resource)
     {
-        try {            
-            $this->setRoute($resource, ROUTES);        
-        // @codeCoverageIgnoreStart    
+        try {
+            $this->setRoute($resource, ROUTES);
+            // @codeCoverageIgnoreStart
         } catch (\Exception $e) {
             Error::printErrorInfo(__FUNCTION__, Error::debugLevel());
             throw $e;
         }
         // @codeCoverageIgnoreEnd
     }
-    
+
     /**
      * @param string $resource
      * @param array $routes
      * @return boolean
      * @throws \Exception
      */
-    private function setRoute(string $resource, array $routes) : bool
+    private function setRoute(string $resource, array $routes): bool
     {
         try {
             $isOk = false;
@@ -57,10 +57,10 @@ class Router extends Accessor
                 return $isOk;
             } else {
                 throw new \Exception('Nome file non trovato.');
-            }        
+            }
         } catch (\Exception $e) {
             Error::printErrorInfo(__FUNCTION__, Error::debugLevel());
             throw $e;
         }
-    }   
+    }
 }

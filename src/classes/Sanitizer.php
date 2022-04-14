@@ -16,7 +16,6 @@ use vaniacarta74\Sourcerer\api\Error;
  */
 class Sanitizer
 {
-    
     /**
      * @param int $type
      * @param string $paramName
@@ -24,13 +23,13 @@ class Sanitizer
      * @param array|int $options
      * @return mixed
      */
-    protected function filterInput(int $type, string $paramName, int $filter, int $options) 
+    protected function filterInput(int $type, string $paramName, int $filter, int $options)
     {
         // @codeCoverageIgnoreStart
         return filter_input($type, $paramName, $filter, $options);
         // @codeCoverageIgnoreEnd
     }
-    
+
     /**
      * @param string $paramName
      * @param int $filterRaw
@@ -49,20 +48,20 @@ class Sanitizer
                 throw new \Exception('Filtraggio valore parametro ' . $paramName . ' fallito.');
             } else {
                 return $response;
-            }        
+            }
         } catch (\Throwable $e) {
             Error::printErrorInfo(__FUNCTION__, Error::debugLevel());
             throw $e;
         }
     }
-    
+
     /**
      * @param string $paramName
      * @param int $filterRaw
      * @param array|int $optionsRaw
      * @return string
      */
-    public function filterServer(string $paramName, ?int $filterRaw = null, ?int $optionsRaw = null) : string
+    public function filterServer(string $paramName, ?int $filterRaw = null, ?int $optionsRaw = null): string
     {
         try {
             $filter = $filterRaw ?? FILTER_DEFAULT;
@@ -74,7 +73,7 @@ class Sanitizer
                 throw new \Exception('Filtraggio valore parametro ' . $paramName . ' fallito.');
             } else {
                 return $response;
-            }        
+            }
         } catch (\Throwable $e) {
             Error::printErrorInfo(__FUNCTION__, Error::debugLevel());
             throw $e;

@@ -24,8 +24,8 @@ class Curl
      * @param bool/null $json
      * @return string
      * @throws \Throwable
-     */    
-    public static function run(string $url, ?string $httpMethod = null, ?array $params = null, ?bool $json = null) : string
+     */
+    public static function run(string $url, ?string $httpMethod = null, ?array $params = null, ?bool $json = null): string
     {
         try {
             $method = $httpMethod ?? 'GET';
@@ -40,14 +40,14 @@ class Curl
                 $ch = self::set($url, $method);
             }
             $report = self::exec($ch);
-            
+
             return $report;
         } catch (\Throwable $e) {
             Error::printErrorInfo(__FUNCTION__, DEBUG_LEVEL);
             throw $e;
         }
     }
-    
+
     /**
      * @param string $url
      * @param string $method
@@ -63,7 +63,7 @@ class Curl
                 throw new \Exception('Formato parametri non corretto o valori non ammessi');
             }
             $isJson = $json ?? false;
-            $ch = curl_init();            
+            $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, TIMEOUT);
@@ -73,7 +73,7 @@ class Curl
                     curl_setopt($ch, CURLOPT_HEADER, false);
                     break;
                 case 'POST':
-                    if (isset($params) && count($params) > 0) {                        
+                    if (isset($params) && count($params) > 0) {
                         if ($isJson) {
                             $posts = json_encode($params);
                             $header = [
@@ -87,7 +87,7 @@ class Curl
                             curl_setopt($ch, CURLOPT_HEADER, false);
                         }
                         curl_setopt($ch, CURLOPT_POST, true);
-                        curl_setopt($ch, CURLOPT_POSTFIELDS, $posts);                    
+                        curl_setopt($ch, CURLOPT_POSTFIELDS, $posts);
                     } else {
                         throw new \Exception('Parametri POST non definiti');
                     }
@@ -95,7 +95,7 @@ class Curl
                 default:
                     curl_setopt($ch, CURLOPT_HEADER, false);
                     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
-                    break;                
+                    break;
             }
             return $ch;
         } catch (\Throwable $e) {
@@ -103,13 +103,13 @@ class Curl
             throw $e;
         }
     }
-    
+
     /**
      * @param resource $ch
      * @return string
      * @throws \Throwable
      */
-    public static function exec($ch) : string
+    public static function exec($ch): string
     {
         try {
             if (!is_resource($ch) && !($ch instanceof \CurlHandle)) {
@@ -117,11 +117,11 @@ class Curl
             }
             $report = curl_exec($ch);
             curl_close($ch);
-            
+
             return $report;
         } catch (\Throwable $e) {
             Error::printErrorInfo(__FUNCTION__, DEBUG_LEVEL);
             throw $e;
         }
-    }    
+    }
 }

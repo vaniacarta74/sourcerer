@@ -14,37 +14,36 @@ use vaniacarta74\Sourcerer\api\Sanitizer;
  *
  * @author adm-gfattori
  */
-class Tools {
-    
-    /**     
+class Tools
+{
+    /**
      * @param string $paramName
      * @return string
      */
-    public static function convertUrl(string $paramName, Sanitizer $sanitizer) : string
+    public static function convertUrl(string $paramName, Sanitizer $sanitizer): string
     {
         try {
             $paramValue = $sanitizer->filterGet($paramName);
-            $uri = $sanitizer->filterServer('REQUEST_URI');            
-           
+            $uri = $sanitizer->filterServer('REQUEST_URI');
+
             if ($paramValue) {
                 $self = $sanitizer->filterServer('PHP_SELF');
-                $taditional = $self . '?' . $paramName . '=' . $paramValue;        
+                $taditional = $self . '?' . $paramName . '=' . $paramValue;
                 $restful = ROOT . 'api/' . $paramValue . '/#';
                 $url = str_replace($taditional, $restful, $uri);
-            } else {    
+            } else {
                 $url = $uri;
-            }            
-            $response = strtok($url, '#');            
-            
+            }
+            $response = strtok($url, '#');
+
             if (!preg_match('/^(.*\/)*$/', $response)) {
                 throw new \Exception('Formato url inaspettato');
             } else {
                 return $response;
             }
-            
-        } catch (\Throwable $e) {        
+        } catch (\Throwable $e) {
             Error::printErrorInfo(__FUNCTION__, Error::debugLevel());
-            throw $e;        
+            throw $e;
         }
-    }  
+    }
 }

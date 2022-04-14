@@ -1,4 +1,5 @@
 <?php
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -18,7 +19,7 @@ namespace vaniacarta74\Sourcerer\api;
 class Error
 {
     public static $logFile = ERROR_LOG;
-    
+
     /**
      * Stampa il nome della funzione che ha generato l'errore.
      *
@@ -30,13 +31,13 @@ class Error
      * @param int $debug_level Livello di debug
      * @return void
      */
-    public static function debugLevel() : int
+    public static function debugLevel(): int
     {
         // @codeCoverageIgnoreStart
         return defined('DEBUG_LEVEL') ? DEBUG_LEVEL : 1;
         // @codeCoverageIgnoreEnd
     }
-    
+
     /**
      * Stampa il nome della funzione che ha generato l'errore.
      *
@@ -48,7 +49,7 @@ class Error
      * @param int $debug_level Livello di debug
      * @return void
      */
-    public static function printErrorInfo(string $functionName, int $debug_level) : void
+    public static function printErrorInfo(string $functionName, int $debug_level): void
     {
         $date = new \DateTime('NOW', new \DateTimeZone('Europe/Rome'));
         switch ($debug_level) {
@@ -61,7 +62,7 @@ class Error
                 break;
         }
     }
-    
+
     /**
      * Gestisce il messagio d'errore in funzione del livello di debug.
      *
@@ -76,7 +77,7 @@ class Error
      * @param string $type
      * @return void
      */
-    public static function errorHandler(\Throwable $e, int $debug_level, string $type) : void
+    public static function errorHandler(\Throwable $e, int $debug_level, string $type): void
     {
         switch ($debug_level) {
             case 0:
@@ -90,7 +91,7 @@ class Error
                 break;
         }
     }
-    
+
     /**
      * Gestisce il messagio d'errore in funzione del livello di debug.
      *
@@ -105,7 +106,7 @@ class Error
      * @param string $type
      * @return void
      */
-    public static function noticeHandler(\Throwable $e, int $debug_level, string $type) : void
+    public static function noticeHandler(\Throwable $e, int $debug_level, string $type): void
     {
         $date = new \DateTime('NOW', new \DateTimeZone('Europe/Rome'));
         switch ($debug_level) {
@@ -120,7 +121,7 @@ class Error
                 break;
         }
     }
-    
+
     /**
      * Stampa su file il messaggio di errore.
      *
@@ -131,12 +132,12 @@ class Error
      * @param string $message Il messaggio da stampare
      * @return void
      */
-    public static function appendToFile(string $message) : void
+    public static function appendToFile(string $message): void
     {
         file_put_contents(self::$logFile, $message, FILE_APPEND);
         //chmod(self::$logFile, 0777);
     }
-    
+
     /**
      * Formatta il messagio d'errore in funzione del contesto.
      *
@@ -148,7 +149,7 @@ class Error
      * @param \Throwable $e Oggetto che gestisce l'errore/eccezione/notifica
      * @return string Messaggio di errore formattato
      */
-    public static function errorMsgCli(\Throwable $e) : string
+    public static function errorMsgCli(\Throwable $e): string
     {
         $offset = 3;
         $message = 'Descrizione Errore' . PHP_EOL;
@@ -171,7 +172,7 @@ class Error
         $message .= PHP_EOL;
         return $message;
     }
-    
+
     /**
      * Formatta il messagio d'errore in funzione del contesto.
      *
@@ -183,7 +184,7 @@ class Error
      * @param \Throwable $e Oggetto che gestisce l'errore/eccezione/notifica
      * @return string Messaggio di errore formattato
      */
-    public static function errorMsgHtml(\Throwable $e) : string
+    public static function errorMsgHtml(\Throwable $e): string
     {
         $message = '<br/><b>Descrizione Errore</b><br/>';
         $message .= 'File: ' . $e->getFile() . '<br/>';
@@ -200,7 +201,7 @@ class Error
         }
         return $message;
     }
-    
+
     /**
      * Formatta il messagio d'errore in funzione del contesto.
      *
@@ -212,7 +213,7 @@ class Error
      * @param \Throwable $e Oggetto che gestisce l'errore/eccezione/notifica
      * @return string Messaggio di errore formattato
      */
-    public static function errorMsgJson(\Throwable $e) : string
+    public static function errorMsgJson(\Throwable $e): string
     {
         $arrJson = [
             'Descrizione errore' => [
@@ -231,7 +232,7 @@ class Error
         $message = json_encode($arrJson);
         return $message;
     }
-    
+
     /**
      * Formatta il messagio d'errore in funzione del contesto.
      *
@@ -243,11 +244,11 @@ class Error
      * @param \Throwable $e Oggetto che gestisce l'errore/eccezione/notifica
      * @return string Messaggio di errore formattato
      */
-    public static function noticeMsgCli(\Throwable $e) : string
+    public static function noticeMsgCli(\Throwable $e): string
     {
-        return 'Notifica: ' . htmlspecialchars(strip_tags($e->getMessage())) . PHP_EOL;       
+        return 'Notifica: ' . htmlspecialchars(strip_tags($e->getMessage())) . PHP_EOL;
     }
-    
+
     /**
      * Formatta il messagio d'errore in funzione del contesto.
      *
@@ -259,11 +260,11 @@ class Error
      * @param \Throwable $e Oggetto che gestisce l'errore/eccezione/notifica
      * @return string Messaggio di errore formattato
      */
-    public static function noticeMsgHtml(\Throwable $e) : string
+    public static function noticeMsgHtml(\Throwable $e): string
     {
         return '<b>Notifica:</b> ' . $e->getMessage() . '<br/>';
     }
-    
+
     /**
      * Formatta il messagio d'errore in funzione del contesto.
      *
@@ -275,7 +276,7 @@ class Error
      * @param \Throwable $e Oggetto che gestisce l'errore/eccezione/notifica
      * @return string Messaggio di errore formattato
      */
-    public static function noticeMsgJson(\Throwable $e) : string
+    public static function noticeMsgJson(\Throwable $e): string
     {
         $arrJson = [
             'ok' => false,
