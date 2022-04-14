@@ -5,7 +5,7 @@
       <directory suffix=".php">../src/classes/</directory>
     </include>
     <exclude>      
-      <file>../src/config/config.php</file>
+      <file>../config/config.php</file>
     </exclude>
     <report>
       <clover outputFile="./log/coverage.xml"/>

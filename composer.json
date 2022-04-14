@@ -23,7 +23,7 @@
     },
     "autoload": {
         "files": [
-            "src/config/config.php",
+            "config/config.php",
             "tests/providers/functions.php"
         ],
         "psr-4": {
@@ -34,7 +34,7 @@
     },
     "autoload-dev": {
         "files": [
-            "src/config/config.php",
+            "config/config.php",
             "tests/providers/functions.php"
         ],
         "psr-4": {
