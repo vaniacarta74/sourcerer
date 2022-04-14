@@ -9,6 +9,6 @@
 namespace vaniacarta74\Sourcerer\tests;
 
 // TODO: check include path
-ini_set('include_path', '/var/www/html/include');
+ini_set('include_path', '/var/www/include');
 
 require __DIR__ . '/../vendor/autoload.php';
