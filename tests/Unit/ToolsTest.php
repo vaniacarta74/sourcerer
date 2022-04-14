@@ -52,8 +52,8 @@ class ToolsTest extends TestCase
                     ],
                     'returns' => [
                         'telecontrollo_classico',
-                        '/sourcerer/sourcerer.git/src/index.php?file=telecontrollo_classico',
-                        '/sourcerer/sourcerer.git/src/index.php'
+                        '/sourcerer/sourcerer.git/public/index.php?file=telecontrollo_classico',
+                        '/sourcerer/sourcerer.git/public/index.php'
                     ]
                 ],
                 'expected' => '/source/api/telecontrollo_classico/'

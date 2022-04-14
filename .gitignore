@@ -1,5 +1,3 @@
-/resource/log/
 /src/.php-cs-fixer.cache
-/tests/log/
 /tests/.phpunit.result.cache
 /vendor/
