@@ -1,12 +1,14 @@
 <?php
 $server = filter_input(INPUT_SERVER, 'SERVER_NAME') ?? getHostByName(getHostName());
 
-if ($server == 'xxxxxx') {
-    $enasURL = 'yyyyyy';
+if ($server == 'xxx.yyyy.zzzzzzzz.tt') {
+    $enas_host = 'www.yyyy.zzzzzzzz.tt';
+    $classic_host = $server;
 } else {
-    $enasURL = 'zzzzzz';
+    $enasURL = 'xxx.xxx.xx.x';
+    $classic_host = 'xx.x.xx.xx';
 }
 
-define('SITPIT_HOST',$server);
-define('ENAS_SERVER_WEB_HOST',$enasURL);
-define('SITE', 'local');                            //valori possibili: 'local|remote'
+define('SITPIT_HOST', $server);
+define('SITPIT_CLASSIC_HOST', $classic_host);
+define('ENAS_SERVER_WEB_HOST', $enas_host);
