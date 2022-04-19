@@ -14,6 +14,8 @@ try {
 
     $router = new Router($resource);
     $route = $router->getRoute();
+    
+    $session = new \vaniacarta74\Sourcerer\SessionManager();
 
     header('Location: http://' . SITPIT_HOST . ROOT . $route);
 } catch (\Exception $e) {
