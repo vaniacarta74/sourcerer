@@ -5,12 +5,5 @@
             "local": "/telecontrollo/index.asp?MM_Logoutnow=1",
             "remote": "/telecontrollo/index.php"
         }
-    },
-    "multisettoriale_25k": {
-        "route": "multisettoriale_25k.php",
-        "params": {
-            "local": "/sitpit.gis/map_MULTI25K.phtml?resetsession=ALL&config=MULTI25K",
-            "remote": "/telecontrollo/index.php"
-        }
     }
 }
