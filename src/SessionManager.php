@@ -16,10 +16,11 @@ use vaniacarta74\Sourcerer\Error;
  *
  * @author Vania Carta
  */
-class SessionManager extends Accessor implements SessionHandlerInterface
+class SessionManager extends Accessor implements \SessionHandlerInterface
 {
 
-//    private $phpSessionId;
+    private $phpSessionId;
+    private $id;
 //    private $idSessione;
 //    private $idUtente;
 //    private $isLogged;
@@ -37,10 +38,11 @@ class SessionManager extends Accessor implements SessionHandlerInterface
      * @return void
      * @throws \Exception
      */
-    public function __construct(): void
+    public function __construct()
     {
         try {
             ini_set('session.save_handler', 'files');
+            session_save_path("/var/www/html/tmp");
             session_set_save_handler($this, true);
             session_set_cookie_params($this->sessionLifetime);
             session_start();
@@ -78,6 +80,8 @@ class SessionManager extends Accessor implements SessionHandlerInterface
             if (!is_dir($this->savePath)) {
                 mkdir($this->savePath, 0777);
             }
+            $this->id = session_id();
+            fopen($this->savePath . '/sess_' . $this->id, 'w+');
         //DataManager::dbOpen();        
             return true;
         } catch (\Exception $e) {
@@ -106,7 +110,7 @@ class SessionManager extends Accessor implements SessionHandlerInterface
      * @return string|false
      * @throws \Exception
      */
-    public function read(string $id)
+    public function read(string $id): string|false
     {
         try {
 //        $sql = 'SELECT id_sessione, n_sessione, utente, logged, creazione, aggiornamento, browser FROM sessioni WHERE n_sessione = "' . $id . '"';
@@ -139,8 +143,9 @@ class SessionManager extends Accessor implements SessionHandlerInterface
 //            $this->isLogged = 0;
 //            $this->browser = $_SERVER['HTTP_USER_AGENT'];
 //        }
-        
-            $string = @file_get_contents($this->savePath . '/sess_' . $id);
+            $this->phpSessionId = $id;
+            //$string = @file_get_contents($this->savePath . '/sess_' . $id);
+            $string = file_get_contents($this->savePath . '/sess_' . $id);
             return $string;
         } catch (\Exception $e) {
             Error::printErrorInfo(__FUNCTION__, Error::debugLevel());
@@ -176,8 +181,8 @@ class SessionManager extends Accessor implements SessionHandlerInterface
 //            $sql = 'INSERT INTO variabili (sessione, nome, valore) VALUES (' . $idSessione . ', "' . $key . '", "' . str_replace('"', '\"', serialize($value)) . '")';
 //            DataManager::dbQuery($sql);                
 //        }
-        
-            $boolean = file_put_contents($this->savePath . '/sess_' . $id, $data) === false ? false : true; 
+            $this->session[] = $data;
+            $boolean = file_put_contents($this->savePath . '/sess_' . $id, $data, FILE_APPEND) === false ? false : true; 
             return $boolean;
         } catch (\Exception $e) {
             Error::printErrorInfo(__FUNCTION__, Error::debugLevel());
@@ -218,7 +223,7 @@ class SessionManager extends Accessor implements SessionHandlerInterface
      * @return int|boolean
      * @throws \Exception
      */
-    public function gc(int $maxlifetime)
+    public function gc(int $maxlifetime): int|false
     {
         try {
 //        $sql = 'SELECT id_sessione, n_sessione FROM sessioni WHERE (NOW() - creazione) > ' . $maxlifetime;
