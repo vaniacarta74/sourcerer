@@ -23,8 +23,7 @@
     },
     "autoload": {
         "files": [
-            "config/config.php",
-            "tests/providers/functions.php"
+            "config/config.php"
         ],
         "psr-4": {
             "vaniacarta74\\Sourcerer\\": "src/",            
@@ -34,8 +33,7 @@
     },
     "autoload-dev": {
         "files": [
-            "config/config.php",
-            "tests/providers/functions.php"
+            "config/config.php"
         ],
         "psr-4": {
             "vaniacarta74\\Sourcerer\\": "src/",            

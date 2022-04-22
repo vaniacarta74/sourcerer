@@ -19,8 +19,8 @@ switch ($method) {
             'params' => filter_input_array(INPUT_GET)
         ];
         break;
-    case 'POST':        
-        if (filter_input(INPUT_GET, 'json')) {        
+    case 'POST':
+        if (filter_input(INPUT_GET, 'json')) {
             $params = @file_get_contents('php://input');
             $arrPost = json_decode($params, true);
         } else {
@@ -53,6 +53,6 @@ switch ($method) {
 $response = [
     'ok' => true,
     'response' => $report
-];    
+];
 http_response_code(200);
 echo json_encode($response);

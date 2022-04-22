@@ -5,5 +5,7 @@
     "root": "/source/",
     "joomla_root": "/joomla/", 
     "error_log": "sourcerer.git/resource/log/error.log",
+    "session_path": "../tmp",
+    "session_lifetime": 600,
     "is_local": 1
 }

@@ -19,14 +19,14 @@ use vaniacarta74\Sourcerer\tests\classes\Reflections;
 class RouterTest extends TestCase
 {
     private $router;
-    
-    protected function setUp() : void
+
+    protected function setUp(): void
     {
         $resource = ROOT . 'api/telecontrollo_classico/';
         $this->router = new Router($resource);
     }
-    
-    protected function tearDown() : void
+
+    protected function tearDown(): void
     {
         $this->router = null;
     }
@@ -35,7 +35,7 @@ class RouterTest extends TestCase
      * @group sourcerer
      * @coversNothing
      */
-    public function constructorProvider() : array
+    public function constructorProvider(): array
     {
         $data = [
             'standard' => [
@@ -43,30 +43,30 @@ class RouterTest extends TestCase
                 'expected' => 'telecontrollo_classico.php'
             ]
         ];
-        
+
         return $data;
     }
-    
+
     /**
      * @group sourcerer
      * @covers vaniacarta74\Sourcerer\Router::__construct
      * @covers vaniacarta74\Sourcerer\Router::setRoute
      * @dataProvider constructorProvider
      */
-    public function testConstructorEquals(string $resource, string $expected) : void
+    public function testConstructorEquals(string $resource, string $expected): void
     {
         Reflections::invokeConstructor($this->router, array($resource));
-        
-        $actual = Reflections::getProperty($this->router, 'route');        
-        
-        $this->assertEquals($expected, $actual);         
+
+        $actual = Reflections::getProperty($this->router, 'route');
+
+        $this->assertEquals($expected, $actual);
     }
-    
+
     /**
      * @group sourcerer
      * @coversNothing
      */
-    public function setRouteProvider() : array
+    public function setRouteProvider(): array
     {
         $data = [
             'standard' => [
@@ -83,27 +83,27 @@ class RouterTest extends TestCase
                 'expected' => true
             ]
         ];
-        
+
         return $data;
     }
-    
+
     /**
      * @group sourcerer
      * @covers vaniacarta74\Sourcerer\Router::setRoute
      * @dataProvider setRouteProvider
      */
-    public function testSetRouteEquals(string $resource, array $routes, bool $expected) : void
+    public function testSetRouteEquals(string $resource, array $routes, bool $expected): void
     {
         $actual = Reflections::invokeMethod($this->router, 'setRoute', array($resource, $routes));
-        
+
         $this->assertEquals($expected, $actual);
     }
-    
+
     /**
      * @group sourcerer
      * @coversNothing
      */
-    public function setRouteExceptionProvider() : array
+    public function setRouteExceptionProvider(): array
     {
         $data = [
             'route not found' => [
@@ -119,19 +119,19 @@ class RouterTest extends TestCase
                 ]
             ]
         ];
-        
+
         return $data;
     }
-    
+
     /**
      * @group sourcerer
      * @covers vaniacarta74\Sourcerer\Router::setRoute
      * @dataProvider setRouteExceptionProvider
      */
-    public function testSetRouteException(string $resource, array $routes) : void
+    public function testSetRouteException(string $resource, array $routes): void
     {
         $this->expectException(\Exception::class);
-        
-        Reflections::invokeMethod($this->router, 'setRoute', array($resource, $routes));        
+
+        Reflections::invokeMethod($this->router, 'setRoute', array($resource, $routes));
     }
 }

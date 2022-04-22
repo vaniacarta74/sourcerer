@@ -21,7 +21,7 @@ class ValidatorTest extends TestCase
      * @group sourcerer
      * @coversNothing
      */
-    public function validateHostNameProvider() : array
+    public function validateHostNameProvider(): array
     {
         $data = [
             'domain' => [
@@ -33,54 +33,54 @@ class ValidatorTest extends TestCase
                 'expected' => '192.168.30.1'
             ]
         ];
-        
+
         return $data;
     }
-    
+
     /**
      * @group sourcerer
      * @covers vaniacarta74\Sourcerer\Validator::validateHostName
      * @dataProvider validateHostNameProvider
      */
-    public function testValidateHostNameEquals(string $varName, string $expected) : void
+    public function testValidateHostNameEquals(string $varName, string $expected): void
     {
-        $actual = Validator::validateHostName($varName);        
-        
-        $this->assertEquals($expected, $actual);         
+        $actual = Validator::validateHostName($varName);
+
+        $this->assertEquals($expected, $actual);
     }
-    
+
     /**
      * @group sourcerer
      * @coversNothing
      */
-    public function validateHostNameExceptionProvider() : array
+    public function validateHostNameExceptionProvider(): array
     {
-        $data = [            
+        $data = [
             'wrong' => [
                 'varName' => 'http://'
             ]
         ];
-        
+
         return $data;
     }
-    
+
     /**
      * @group sourcerer
      * @covers vaniacarta74\Sourcerer\Validator::validateHostName
      * @dataProvider validateHostNameExceptionProvider
      */
-    public function testValidateHostNameException(string $varName) : void
+    public function testValidateHostNameException(string $varName): void
     {
         $this->expectException(\Exception::class);
-        
-        Validator::validateHostName($varName);        
+
+        Validator::validateHostName($varName);
     }
-    
+
     /**
      * @group sourcerer
      * @coversNothing
      */
-    public function validateIPv4Provider() : array
+    public function validateIPv4Provider(): array
     {
         $data = [
             'ipv4' => [
@@ -88,46 +88,46 @@ class ValidatorTest extends TestCase
                 'expected' => '192.168.30.1'
             ]
         ];
-        
+
         return $data;
     }
-    
+
     /**
      * @group sourcerer
      * @covers vaniacarta74\Sourcerer\Validator::validateIPv4
      * @dataProvider validateIPv4Provider
      */
-    public function testValidateIPv4Equals(string $varName, string $expected) : void
+    public function testValidateIPv4Equals(string $varName, string $expected): void
     {
-        $actual = Validator::validateIPv4($varName);        
-        
-        $this->assertEquals($expected, $actual);         
+        $actual = Validator::validateIPv4($varName);
+
+        $this->assertEquals($expected, $actual);
     }
-    
+
     /**
      * @group sourcerer
      * @coversNothing
      */
-    public function validateIPv4ExceptionProvider() : array
+    public function validateIPv4ExceptionProvider(): array
     {
-        $data = [            
+        $data = [
             'domain' => [
                 'varName' => 'spt.enas.sardegna.it'
             ]
         ];
-        
+
         return $data;
     }
-    
+
     /**
      * @group sourcerer
      * @covers vaniacarta74\Sourcerer\Validator::validateIPv4
      * @dataProvider validateIPv4ExceptionProvider
      */
-    public function testValidateIPv4Exception(string $varName) : void
+    public function testValidateIPv4Exception(string $varName): void
     {
         $this->expectException(\Exception::class);
-        
-        Validator::validateIPv4($varName);        
+
+        Validator::validateIPv4($varName);
     }
 }

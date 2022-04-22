@@ -26,6 +26,7 @@ class Utility
      *
      * @param string $strDateTime Data nel formato "YYYY-mm-dd HH:ii:ss.millisec"
      * @return string Intervallo intercorso nel formato "secondi,millisecondi"
+     * @throws \Exception
      */
     public static function benchmark(string $strDateTime): string
     {
@@ -46,28 +47,20 @@ class Utility
                 $interval = $dateInterval->format('%h ora, %i min e %s sec');
             }
             return $interval;
-        } catch (\Throwable $e) {
+        } catch (\Exception $e) {
             Error::printErrorInfo(__FUNCTION__, Error::debugLevel());
             throw $e;
         }
     }
 
     /**
-     * @param array|string $functionName
-     * @return string
+     * @param callable $functionName
+     * @return mixed
      */
-    public static function callback($functionName, array $params)
+    public static function callback(callable $functionName, array $params): mixed
     {
-        try {
-            if (is_callable($functionName)) {
-                $result = call_user_func_array($functionName, $params);
-            } else {
-                throw new \Exception('Funzione inesistente');
-            }
-            return $result;
-        } catch (\Throwable $e) {
-            Error::printErrorInfo(__FUNCTION__, Error::debugLevel());
-            throw $e;
-        }
+        // @codeCoverageIgnoreStart
+        return call_user_func_array($functionName, $params);
+        // @codeCoverageIgnoreEnd
     }
 }

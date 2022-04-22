@@ -11,7 +11,6 @@ namespace vaniacarta74\Sourcerer\tests\Unit;
 use PHPUnit\Framework\TestCase;
 use vaniacarta74\Sourcerer\Tools;
 
-
 /**
  * Description of AccessorTest
  *
@@ -19,12 +18,11 @@ use vaniacarta74\Sourcerer\Tools;
  */
 class ToolsTest extends TestCase
 {
-    
     /**
      * @group sanitizer
      * @coversNothing
      */
-    public function convertUrlProviderA() : array
+    public function convertUrlProviderA(): array
     {
         $data = [
             'classic url' => [
@@ -59,21 +57,20 @@ class ToolsTest extends TestCase
                 'expected' => '/source/api/telecontrollo_classico/'
             ]
         ];
-        
+
         return $data;
     }
-    
+
     /**
      * @group sanitizer
      * @covers \vaniacarta74\Sourcerer\Tools::convertUrl
      * @dataProvider convertUrlProviderA
      */
-    public function testConvertUrlEqualsA(string $paramName, array $filterInput, string $expected) : void
+    public function testConvertUrlEqualsA(string $paramName, array $filterInput, string $expected): void
     {
-                
         $mock = $this->getMockBuilder('\vaniacarta74\Sourcerer\Sanitizer')
                     ->setMethods(['filterInput'])
-                    ->getMock();                    
+                    ->getMock();
 
         $mock->expects($this->exactly(3))
             ->method('filterInput')
@@ -87,17 +84,17 @@ class ToolsTest extends TestCase
                 $filterInput['returns'][1],
                 $filterInput['returns'][2]
             );
-    
-        $actual = Tools::convertUrl($paramName, $mock); 
+
+        $actual = Tools::convertUrl($paramName, $mock);
 
         $this->assertEquals($expected, $actual);
     }
-    
+
     /**
      * @group sanitizer
      * @coversNothing
      */
-    public function convertUrlProviderB() : array
+    public function convertUrlProviderB(): array
     {
         $data = [
             'restful url' => [
@@ -115,31 +112,30 @@ class ToolsTest extends TestCase
                 'expected' => '/source/api/telecontrollo_classico/'
             ]
         ];
-        
+
         return $data;
     }
-    
+
     /**
      * @group sanitizer
      * @covers \vaniacarta74\Sourcerer\Tools::convertUrl
      * @dataProvider convertUrlProviderB
      */
-    public function testConvertUrlEqualsB(string $paramName, array $sanitizer, string $expected) : void
+    public function testConvertUrlEqualsB(string $paramName, array $sanitizer, string $expected): void
     {
-                
         $mock = $this->getMockBuilder('\vaniacarta74\Sourcerer\Sanitizer')
                     ->setMethods(['filterGet', 'filterServer'])
-                    ->getMock();                    
+                    ->getMock();
 
         $mock->method('filterGet')
             ->with($sanitizer['params'][0])
             ->willReturn($sanitizer['returns'][0]);
-        
+
         $mock->method('filterServer')
             ->with($sanitizer['params'][1])
             ->willReturn($sanitizer['returns'][1]);
-    
-        $actual = Tools::convertUrl($paramName, $mock); 
+
+        $actual = Tools::convertUrl($paramName, $mock);
 
         $this->assertEquals($expected, $actual);
     }
@@ -148,7 +144,7 @@ class ToolsTest extends TestCase
      * @group sanitizer
      * @coversNothing
      */
-    public function convertUrlExceptionProvider() : array
+    public function convertUrlExceptionProvider(): array
     {
         $data = [
             'classic url no param' => [
@@ -166,31 +162,31 @@ class ToolsTest extends TestCase
                 'expected' => '/source/index.php'
             ]
         ];
-        
+
         return $data;
     }
-    
+
     /**
      * @group sanitizer
      * @covers \vaniacarta74\Sourcerer\Tools::convertUrl
      * @dataProvider convertUrlExceptionProvider
      */
-    public function testConvertUrlException(string $paramName, array $sanitizer, string $expected) : void
+    public function testConvertUrlException(string $paramName, array $sanitizer, string $expected): void
     {
         $this->expectException(\Exception::class);
-        
+
         $mock = $this->getMockBuilder('\vaniacarta74\Sourcerer\Sanitizer')
                     ->setMethods(['filterGet', 'filterServer'])
-                    ->getMock();                    
+                    ->getMock();
 
         $mock->method('filterGet')
             ->with($sanitizer['params'][0])
             ->willReturn($sanitizer['returns'][0]);
-        
+
         $mock->method('filterServer')
             ->with($sanitizer['params'][1])
             ->willReturn($sanitizer['returns'][1]);
-    
+
         Tools::convertUrl($paramName, $mock);
     }
 }

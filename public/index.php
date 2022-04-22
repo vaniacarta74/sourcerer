@@ -15,14 +15,14 @@ try {
 
     $router = new Router($resource);
     $route = $router->getRoute();
-    
-    $session = new SessionManager();
+
+    $session = new SessionManager(SESSION_PATH, SESSION_LIFETIME);
     $_SESSION['pippo'] = 'pluto';
     $_SESSION['topolino'] = 'paperino';
     session_write_close();
     $test = $_SESSION;
-    
-    //$session2 = new SessionManager();
+
+    $session2 = new SessionManager();
     $_SESSION['pippo2'] = 'pluto';
     $_SESSION['topolino2'] = 'paperino';
     session_write_close();

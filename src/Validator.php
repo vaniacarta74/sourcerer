@@ -18,7 +18,8 @@ class Validator
 {
     /**
      * @param string $varName
-     * @return mixed
+     * @return string
+     * @throws \Exception
      */
     public static function validateHostName(string $varName): string
     {
@@ -29,7 +30,7 @@ class Validator
             } else {
                 return $response;
             }
-        } catch (\Throwable $e) {
+        } catch (\Exception $e) {
             Error::printErrorInfo(__FUNCTION__, Error::debugLevel());
             throw $e;
         }
@@ -37,7 +38,8 @@ class Validator
 
     /**
      * @param string $varName
-     * @return mixed
+     * @return string
+     * @throws \Exception
      */
     public static function validateIPv4(string $varName): string
     {

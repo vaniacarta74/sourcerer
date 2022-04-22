@@ -17,10 +17,7 @@ use vaniacarta74\Sourcerer\Accessor;
  */
 class Extender extends Accessor
 {
-    protected $property;
-    
-    public function __construct($property)
+    public function __construct(protected mixed $property)
     {
-        $this->property = $property;
     }
 }

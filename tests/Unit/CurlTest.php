@@ -23,12 +23,12 @@ class CurlTest extends TestCase
      */
     public function runProvider()
     {
-        $data = [            
+        $data = [
             'get no params' => [
                 'url' => 'http://localhost/source_tests/providers/curlTest.php',
                 'method' => 'GET',
                 'params' => null,
-                'json' => null,                
+                'json' => null,
                 'expected' => '{
                     "ok": true,
                     "response": {
@@ -41,7 +41,7 @@ class CurlTest extends TestCase
                 'url' => 'http://localhost/source_tests/providers/curlTest.php?var=30030&datefrom=01/01/2020',
                 'method' => 'GET',
                 'params' => null,
-                'json' => null,                
+                'json' => null,
                 'expected' => '{
                     "ok": true,
                     "response": {
@@ -147,28 +147,28 @@ class CurlTest extends TestCase
                 }'
             ]
         ];
-        
+
         return $data;
     }
-    
+
     /**
      * @group curl
      * @covers \vaniacarta74\Sourcerer\Curl::run
      * @covers \vaniacarta74\Sourcerer\Curl::exec
-     * @dataProvider runProvider     
+     * @dataProvider runProvider
      */
     public function testRunEqualsJsonString($url, $method, $params, $json, $expected)
     {
         $actual = Curl::run($url, $method, $params, $json);
-        
+
         $this->assertJsonStringEqualsJsonString($expected, $actual);
     }
-    
+
     /**
      * @group curl
      * @covers \vaniacarta74\Sourcerer\Curl::run
      */
-    public function testRunPostEquals() : void
+    public function testRunPostEquals(): void
     {
         $params = [
             'var' => '30030',
@@ -180,31 +180,31 @@ class CurlTest extends TestCase
         $url = 'http://localhost/source_tests/providers/curlTest.php';
         $json = false;
         $expected = '{"ok":true,"response":{"method":"POST","params":{"var":"30030","datefrom":"30\/12\/2019","dateto":"31\/12\/2019","field":"portata","full":"0"}}}';
-                
+
         $actual = Curl::run($url, 'POST', $params, $json);
-        
+
         $this->assertEquals($expected, $actual);
     }
-    
+
     /**
      * @group curl
      * @covers \vaniacarta74\Sourcerer\Curl::run
      */
-    public function testRunGetEquals() : void
+    public function testRunGetEquals(): void
     {
         $url = 'http://localhost/source_tests/providers/curlTest.php?var=30030&datefrom=30/12/2019&dateto=31/12/2019&field=portata&full=0';
         $expected = '{"ok":true,"response":{"method":"GET","params":{"var":"30030","datefrom":"30\/12\/2019","dateto":"31\/12\/2019","field":"portata","full":"0"}}}';
-        
+
         $actual = Curl::run($url);
-        
+
         $this->assertEquals($expected, $actual);
     }
-    
+
     /**
      * @group curl
      * @covers \vaniacarta74\Sourcerer\Curl::run
      */
-    public function testRunJsonStringEqualsJsonFile() : void
+    public function testRunJsonStringEqualsJsonFile(): void
     {
         $params = [
             'var' => '30030',
@@ -216,42 +216,41 @@ class CurlTest extends TestCase
         $url = 'http://localhost/source_tests/providers/curlTest.php?json=1';
         $json = true;
         $expected = '{"ok":true,"response":{"method":"POST","params":{"var":"30030","datefrom":"23\/04\/2020","dateto":"24\/04\/2020","field":"portata","full":"0"}}}';
-        
+
         $actual = Curl::run($url, 'POST', $params, $json);
-        
+
         $this->assertJsonStringEqualsJsonString($expected, $actual);
     }
-    
+
     /**
      * @group curl
      * @covers \vaniacarta74\Sourcerer\Curl::run
      */
-    public function testRunPostException() : void
+    public function testRunPostException(): void
     {
         $params = [];
         $url = 'http://localhost/source_tests/providers/curlTest.php';
-        
+
         $this->expectException(\Exception::class);
-        
+
         Curl::run($url, 'POST', $params);
     }
-    
+
     /**
      * @group curl
      * @covers \vaniacarta74\Sourcerer\Curl::run
      */
     public function testRunException()
     {
-        
         $url = 'http://localhost/source_tests/providers/curlTest.php';
         $method = 'POST';
         $params = [];
-        
+
         $this->expectException(\Exception::class);
-        
+
         Curl::run($url, $method, $params);
     }
-    
+
     /**
      * @group curl
      * @coversNothing
@@ -312,31 +311,31 @@ class CurlTest extends TestCase
                 'json' => null
             ]
         ];
-        
+
         return $data;
     }
-    
+
     /**
      * @group curl
      * @covers \vaniacarta74\Sourcerer\Curl::set
-     * @dataProvider setProvider     
+     * @dataProvider setProvider
      */
     public function testSetIsResource($url, $method, $params, $json)
     {
         $ch = Curl::set($url, $method, $params, $json);
-        
+
         if ((PHP_MAJOR_VERSION * 10 + PHP_MINOR_VERSION)>= 81) {
             $actual = $ch instanceof \CurlHandle;
         } else {
             $actual = is_resource($ch);
         }
-        
+
         $this->assertTrue($actual);
-    }   
-        
+    }
+
     /**
      * @group curl
-     * @covers \vaniacarta74\Sourcerer\Curl::set     
+     * @covers \vaniacarta74\Sourcerer\Curl::set
      */
     public function testSetPostIsResource()
     {
@@ -348,40 +347,40 @@ class CurlTest extends TestCase
             'full' => '0'
         ];
         $url = 'http://localhost/source_tests/providers/curlTest.php';
-        
+
         $actual = Curl::set($url, 'POST', $params);
-        
+
         if ((PHP_MAJOR_VERSION * 10 + PHP_MINOR_VERSION)>= 81) {
             $this->assertIsObject($actual);
         } else {
             $this->assertIsResource($actual);
         }
-        
+
         return $actual;
     }
-    
+
     /**
      * @group curl
-     * @covers \vaniacarta74\Sourcerer\Curl::set     
+     * @covers \vaniacarta74\Sourcerer\Curl::set
      */
     public function testSetGetIsResource()
     {
         $url = 'http://localhost/source_tests/providers/curlTest.php';
-        
+
         $actual = Curl::set($url, 'GET');
-        
+
         if ((PHP_MAJOR_VERSION * 10 + PHP_MINOR_VERSION)>= 81) {
             $this->assertIsObject($actual);
         } else {
             $this->assertIsResource($actual);
         }
-        
+
         return $actual;
     }
-    
+
     /**
      * @group curl
-     * @covers \vaniacarta74\Sourcerer\Curl::set     
+     * @covers \vaniacarta74\Sourcerer\Curl::set
      */
     public function testSetIsJsonIsResource()
     {
@@ -393,25 +392,25 @@ class CurlTest extends TestCase
             'full' => '0'
         ];
         $url = 'http://localhost/scarichi/tojson.php';
-        
+
         $actual = Curl::set($url, 'POST', $params, true);
-        
+
         if ((PHP_MAJOR_VERSION * 10 + PHP_MINOR_VERSION)>= 81) {
             $this->assertIsObject($actual);
         } else {
             $this->assertIsResource($actual);
         }
-        
+
         return $actual;
     }
-    
+
     /**
      * @group curl
      * @coversNothing
      */
     public function setExceptionProvider()
     {
-        $data = [            
+        $data = [
             'wrong method' => [
                 'url' => 'http://localhost/source_tests/providers/curlTest.php',
                 'method' => 'PIPPO',
@@ -431,10 +430,10 @@ class CurlTest extends TestCase
                 'json' => null
             ]
         ];
-        
+
         return $data;
     }
-    
+
     /**
      * @group curl
      * @covers \vaniacarta74\Sourcerer\Curl::set
@@ -443,52 +442,39 @@ class CurlTest extends TestCase
     public function testSetException($url, $method, $params, $json)
     {
         $this->expectException(\Exception::class);
-        
+
         Curl::set($url, $method, $params, $json);
     }
-    
+
     /**
      * @group curl
      * @covers \vaniacarta74\Sourcerer\Curl::set
      */
-    public function testSetPostException() : void
+    public function testSetPostException(): void
     {
         $params = [];
         $url = 'http://localhost/source_tests/providers/curlTest.php';
-        
+
         $this->expectException(\Exception::class);
-        
+
         Curl::set($url, 'POST', $params);
-    }   
-    
+    }
+
     /**
      * @group curl
      * @covers \vaniacarta74\Sourcerer\Curl::exec
      * @depends testSetPostIsResource
      */
-    public function testExecContainsString($ch) : void
+    public function testExecContainsString($ch): void
     {
         $response = '{"ok":true,"response":{"method":"POST","params":{"var":"30030","datefrom":"30\/12\/2019","dateto":"31\/12\/2019","field":"portata","full":"0"}}}';
-        
+
         $expecteds = explode('|', $response);
-        
+
         $actual = Curl::exec($ch);
-        
+
         foreach ($expecteds as $expected) {
             $this->assertStringContainsString($expected, $actual);
         }
     }
-    
-    /**
-     * @group curl
-     * @covers \vaniacarta74\Sourcerer\Curl::exec
-     */
-    public function testExecNullException() : void
-    {
-        $ch = null;
-        
-        $this->expectException(\Exception::class);
-        
-        Curl::exec($ch);
-    }   
 }

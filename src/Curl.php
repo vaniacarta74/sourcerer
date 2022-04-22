@@ -51,12 +51,12 @@ class Curl
     /**
      * @param string $url
      * @param string $method
-     * @param array/null $params
-     * @param bool/null $json
-     * @return resource
+     * @param array|null $params
+     * @param bool|null $json
+     * @return \CurlHandle
      * @throws \Throwable
      */
-    public static function set(string $url, string $method, ?array $params = null, ?bool $json = null)
+    public static function set(string $url, string $method, ?array $params = null, ?bool $json = null): \CurlHandle
     {
         try {
             if (!in_array($method, array('GET', 'POST', 'PUT', 'PATCH', 'DELETE'))) {
@@ -105,23 +105,22 @@ class Curl
     }
 
     /**
-     * @param resource $ch
+     * @param \CurlHandle $ch
      * @return string
      * @throws \Throwable
      */
-    public static function exec($ch): string
+    public static function exec(\CurlHandle $ch): string
     {
         try {
-            if (!is_resource($ch) && !($ch instanceof \CurlHandle)) {
-                throw new \Exception('Risorsa non definita');
-            }
             $report = curl_exec($ch);
             curl_close($ch);
 
             return $report;
+            // @codeCoverageIgnoreStart
         } catch (\Throwable $e) {
             Error::printErrorInfo(__FUNCTION__, DEBUG_LEVEL);
             throw $e;
         }
+        // @codeCoverageIgnoreEnd
     }
 }

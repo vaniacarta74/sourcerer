@@ -19,6 +19,7 @@ class Tools
     /**
      * @param string $paramName
      * @return string
+     * @throws \Exception
      */
     public static function convertUrl(string $paramName, Sanitizer $sanitizer): string
     {
@@ -41,7 +42,7 @@ class Tools
             } else {
                 return $response;
             }
-        } catch (\Throwable $e) {
+        } catch (\Exception $e) {
             Error::printErrorInfo(__FUNCTION__, Error::debugLevel());
             throw $e;
         }

@@ -18,6 +18,8 @@ define('DEBUG_LEVEL', $system['debug_level']);
 define('ROOT', $system['root']);
 define('JOOMLA_ROOT', $system['joomla_root']);
 define('ERROR_LOG', __DIR__ . '/../../' . $system['error_log']);
+define('SESSION_PATH', __DIR__ . '/../../' . $system['session_path']);
+define('SESSION_LIFETIME', (int) $system['session_lifetime']);
 
 $system['is_local'] ? define('SITE', 'local') : define('SITE', 'remote');
 

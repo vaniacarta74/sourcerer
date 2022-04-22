@@ -18,7 +18,7 @@ use vaniacarta74\Sourcerer\Error;
  */
 class Router extends Accessor
 {
-    protected $route;
+    protected string $route;
 
     /**
      * @param string $resource

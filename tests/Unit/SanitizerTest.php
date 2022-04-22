@@ -10,7 +10,6 @@ namespace vaniacarta74\Sourcerer\tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 
-
 /**
  * Description of AccessorTest
  *
@@ -18,12 +17,11 @@ use PHPUnit\Framework\TestCase;
  */
 class SanitizerTest extends TestCase
 {
-    
     /**
      * @group sanitizer
      * @coversNothing
      */
-    public function filterGetProvider() : array
+    public function filterGetProvider(): array
     {
         $data = [
             'telecontrollo classico' => [
@@ -41,26 +39,25 @@ class SanitizerTest extends TestCase
                 'expected' => null
             ]
         ];
-        
+
         return $data;
     }
-    
+
     /**
      * @group sanitizer
      * @covers \vaniacarta74\Sourcerer\Sanitizer::filterGet
      * @covers \vaniacarta74\Sourcerer\Sanitizer::filterInput
      * @dataProvider filterGetProvider
      */
-    public function testFilterGetEquals(string $paramName, int $filterRaw, int $optionsRaw, ?string $paramValue, ?string $expected) : void
+    public function testFilterGetEquals(string $paramName, int $filterRaw, int $optionsRaw, ?string $paramValue, ?string $expected): void
     {
-                
         $mock = $this->getMockBuilder('\vaniacarta74\Sourcerer\Sanitizer')
                     ->setMethods(['filterInput'])
                     ->getMock();
-        
+
         $mock->method('filterInput')
             ->with(INPUT_GET, $paramName, $filterRaw, $optionsRaw)
-            ->willReturnCallback(function() use ($paramName, $filterRaw, $optionsRaw) {
+            ->willReturnCallback(function () use ($paramName, $filterRaw, $optionsRaw) {
                 if (!isset($_GET[$paramName])) {
                     return null;
                 }
@@ -70,7 +67,7 @@ class SanitizerTest extends TestCase
             });
 
         $_GET[$paramName] = $paramValue;
-        $actual = $mock->filterGet($paramName, $filterRaw, $optionsRaw); 
+        $actual = $mock->filterGet($paramName, $filterRaw, $optionsRaw);
 
         $this->assertEquals($expected, $actual);
     }
@@ -79,7 +76,7 @@ class SanitizerTest extends TestCase
      * @group sanitizer
      * @coversNothing
      */
-    public function filterGetExceptionProvider() : array
+    public function filterGetExceptionProvider(): array
     {
         $data = [
                 'return false' => [
@@ -90,27 +87,27 @@ class SanitizerTest extends TestCase
                 'expected' => 'telecontrollo_classico'
             ]
         ];
-        
+
         return $data;
     }
-    
+
     /**
      * @group sanitizer
      * @covers \vaniacarta74\Sourcerer\Sanitizer::filterGet
      * @covers \vaniacarta74\Sourcerer\Sanitizer::filterInput
      * @dataProvider filterGetExceptionProvider
      */
-    public function testFilterGetExceptionEquals(string $paramName, int $filterRaw, int $optionsRaw, ?string $paramValue) : void
+    public function testFilterGetExceptionEquals(string $paramName, int $filterRaw, int $optionsRaw, ?string $paramValue): void
     {
         $this->expectException(\Exception::class);
-        
+
         $mock = $this->getMockBuilder('\vaniacarta74\Sourcerer\Sanitizer')
                     ->setMethods(['filterInput'])
                     ->getMock();
-        
+
         $mock->method('filterInput')
             ->with(INPUT_GET, $paramName, $filterRaw, $optionsRaw)
-            ->willReturnCallback(function() use ($paramName, $filterRaw, $optionsRaw) {
+            ->willReturnCallback(function () use ($paramName, $filterRaw, $optionsRaw) {
                 if (!isset($_GET[$paramName])) {
                     return null;
                 }
@@ -120,14 +117,14 @@ class SanitizerTest extends TestCase
             });
 
         $_GET[$paramName] = $paramValue;
-        $mock->filterGet($paramName, $filterRaw, $optionsRaw); 
+        $mock->filterGet($paramName, $filterRaw, $optionsRaw);
     }
 
     /**
      * @group sanitizer
      * @coversNothing
      */
-    public function filterServerProvider() : array
+    public function filterServerProvider(): array
     {
         $data = [
             'request uri' => [
@@ -145,26 +142,25 @@ class SanitizerTest extends TestCase
                 'expected' => 'telecontrollo_classico'
             ]
         ];
-        
+
         return $data;
     }
-    
+
     /**
      * @group sanitizer
      * @covers \vaniacarta74\Sourcerer\Sanitizer::filterServer
      * @covers \vaniacarta74\Sourcerer\Sanitizer::filterInput
      * @dataProvider filterServerProvider
      */
-    public function testFilterServerEquals(string $paramName, int $filterRaw, int $optionsRaw, string $paramValue, string $expected) : void
+    public function testFilterServerEquals(string $paramName, int $filterRaw, int $optionsRaw, string $paramValue, string $expected): void
     {
-                
         $mock = $this->getMockBuilder('\vaniacarta74\Sourcerer\Sanitizer')
                     ->setMethods(['filterInput'])
                     ->getMock();
-        
+
         $mock->method('filterInput')
             ->with(INPUT_SERVER, $paramName, $filterRaw, $optionsRaw)
-            ->willReturnCallback(function() use ($paramName, $filterRaw, $optionsRaw) {
+            ->willReturnCallback(function () use ($paramName, $filterRaw, $optionsRaw) {
                 if (!isset($_SERVER[$paramName])) {
                     return null;
                 }
@@ -174,7 +170,7 @@ class SanitizerTest extends TestCase
             });
 
         $_SERVER[$paramName] = $paramValue;
-        $actual = $mock->filterServer($paramName, $filterRaw, $optionsRaw); 
+        $actual = $mock->filterServer($paramName, $filterRaw, $optionsRaw);
 
         $this->assertEquals($expected, $actual);
     }
@@ -183,7 +179,7 @@ class SanitizerTest extends TestCase
      * @group sanitizer
      * @coversNothing
      */
-    public function filterServerExceptionProvider() : array
+    public function filterServerExceptionProvider(): array
     {
         $data = [
             'option out of range' => [
@@ -208,27 +204,27 @@ class SanitizerTest extends TestCase
                 'expected' => 'telecontrollo_classico'
             ]
         ];
-        
+
         return $data;
     }
-    
+
     /**
      * @group sanitizer
      * @covers \vaniacarta74\Sourcerer\Sanitizer::filterServer
      * @covers \vaniacarta74\Sourcerer\Sanitizer::filterInput
      * @dataProvider filterServerExceptionProvider
      */
-    public function testFilterServerExceptionEquals(string $paramName, int $filterRaw, int $optionsRaw, ?string $paramValue) : void
+    public function testFilterServerExceptionEquals(string $paramName, int $filterRaw, int $optionsRaw, ?string $paramValue): void
     {
         $this->expectException(\Exception::class);
-        
+
         $mock = $this->getMockBuilder('\vaniacarta74\Sourcerer\Sanitizer')
                     ->setMethods(['filterInput'])
                     ->getMock();
-        
+
         $mock->method('filterInput')
             ->with(INPUT_SERVER, $paramName, $filterRaw, $optionsRaw)
-            ->willReturnCallback(function() use ($paramName, $filterRaw, $optionsRaw) {
+            ->willReturnCallback(function () use ($paramName, $filterRaw, $optionsRaw) {
                 if (!isset($_SERVER[$paramName])) {
                     return null;
                 }
@@ -238,6 +234,6 @@ class SanitizerTest extends TestCase
             });
 
         $_SERVER[$paramName] = $paramValue;
-        $mock->filterServer($paramName, $filterRaw, $optionsRaw); 
+        $mock->filterServer($paramName, $filterRaw, $optionsRaw);
     }
 }

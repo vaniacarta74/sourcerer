@@ -23,7 +23,7 @@ class Sanitizer
      * @param array|int $options
      * @return mixed
      */
-    protected function filterInput(int $type, string $paramName, int $filter, int $options)
+    protected function filterInput(int $type, string $paramName, int $filter, array|int $options): mixed
     {
         // @codeCoverageIgnoreStart
         return filter_input($type, $paramName, $filter, $options);
@@ -32,11 +32,12 @@ class Sanitizer
 
     /**
      * @param string $paramName
-     * @param int $filterRaw
-     * @param array|int $optionsRaw
-     * @return string
+     * @param int|null $filterRaw
+     * @param array|int|null $optionsRaw
+     * @return string|null
+     * @throws \Exception
      */
-    public function filterGet(string $paramName, ?int $filterRaw = null, ?int $optionsRaw = null)
+    public function filterGet(string $paramName, ?int $filterRaw = null, array|int|null $optionsRaw = null): ?string
     {
         try {
             $filter = $filterRaw ?? FILTER_DEFAULT;
@@ -47,9 +48,9 @@ class Sanitizer
             } elseif (!$response) {
                 throw new \Exception('Filtraggio valore parametro ' . $paramName . ' fallito.');
             } else {
-                return $response;
+                return (string)$response;
             }
-        } catch (\Throwable $e) {
+        } catch (\Exception $e) {
             Error::printErrorInfo(__FUNCTION__, Error::debugLevel());
             throw $e;
         }
@@ -57,11 +58,12 @@ class Sanitizer
 
     /**
      * @param string $paramName
-     * @param int $filterRaw
-     * @param array|int $optionsRaw
+     * @param int|null $filterRaw
+     * @param array|int|null $optionsRaw
      * @return string
+     * @throws \Exception
      */
-    public function filterServer(string $paramName, ?int $filterRaw = null, ?int $optionsRaw = null): string
+    public function filterServer(string $paramName, ?int $filterRaw = null, array|int|null $optionsRaw = null): string
     {
         try {
             $filter = $filterRaw ?? FILTER_DEFAULT;
@@ -72,9 +74,9 @@ class Sanitizer
             } elseif (!$response) {
                 throw new \Exception('Filtraggio valore parametro ' . $paramName . ' fallito.');
             } else {
-                return $response;
+                return (string)$response;
             }
-        } catch (\Throwable $e) {
+        } catch (\Exception $e) {
             Error::printErrorInfo(__FUNCTION__, Error::debugLevel());
             throw $e;
         }

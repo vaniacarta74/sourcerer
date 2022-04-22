@@ -20,10 +20,10 @@ class Accessor
     /**
      * @param string $name
      * @param array $arguments
-     * @return boolean|mixed
+     * @return mixed
      * @throws \Exception
      */
-    public function __call(string $name, array $arguments)
+    public function __call(string $name, array $arguments): mixed
     {
         try {
             $method = substr($name, 0, 3);
@@ -37,7 +37,6 @@ class Accessor
                     break;
                 default:
                     throw new \Exception('Nome metodo accessorio errato');
-                    break;
             }
             if (isset($response) && $response !== false) {
                 return $response;
@@ -56,7 +55,7 @@ class Accessor
      * @return boolean
      * @throws \Exception
      */
-    public function setAccessor(string $property, array $arguments)
+    public function setAccessor(string $property, array $arguments): bool
     {
         try {
             $response = false;
@@ -75,10 +74,10 @@ class Accessor
 
     /**
      * @param string $property
-     * @return boolean|mixed
+     * @return mixed
      * @throws \Exception
      */
-    public function getAccessor(string $property)
+    public function getAccessor(string $property): mixed
     {
         try {
             if (property_exists($this, $property)) {

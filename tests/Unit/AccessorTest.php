@@ -20,22 +20,22 @@ use vaniacarta74\Sourcerer\tests\classes\Reflections;
 class AccessorTest extends TestCase
 {
     private $extender;
-    
-    protected function setUp() : void
+
+    protected function setUp(): void
     {
         $this->extender = new Extender('pippo');
     }
-    
-    protected function tearDown() : void
+
+    protected function tearDown(): void
     {
         $this->extender = null;
     }
-    
+
     /**
      * @group accessor
      * @coversNothing
      */
-    public function callProvider() : array
+    public function callProvider(): array
     {
         $data = [
             'set' => [
@@ -55,10 +55,10 @@ class AccessorTest extends TestCase
                 'expected' => 'pippo'
             ]
         ];
-        
+
         return $data;
     }
-    
+
     /**
      * @group accessor
      * @covers \vaniacarta74\Sourcerer\Accessor::__call
@@ -66,22 +66,22 @@ class AccessorTest extends TestCase
      * @covers \vaniacarta74\Sourcerer\Accessor::getAccessor
      * @dataProvider callProvider
      */
-    public function testCallEquals(array $args, $expected) : void   
-    {        
+    public function testCallEquals(array $args, $expected): void
+    {
         $property = lcfirst(preg_replace('/^(set|get)/', '', $args['name']));
-        
+
         Reflections::setProperty($this->extender, $property, 'pippo');
-        
+
         $actual = Reflections::invokeMethod($this->extender, '__call', $args);
-        
+
         $this->assertEquals($expected, $actual);
     }
-    
+
     /**
      * @group accessor
      * @coversNothing
      */
-    public function callExceptionProvider() : array
+    public function callExceptionProvider(): array
     {
         $data = [
             'no method' => [
@@ -99,10 +99,10 @@ class AccessorTest extends TestCase
                 ]
             ]
         ];
-        
+
         return $data;
     }
-    
+
     /**
      * @group accessor
      * @covers \vaniacarta74\Sourcerer\Accessor::__call
@@ -110,10 +110,10 @@ class AccessorTest extends TestCase
      * @covers \vaniacarta74\Sourcerer\Accessor::getAccessor
      * @dataProvider callExceptionProvider
      */
-    public function testCallException(array $args) : void
+    public function testCallException(array $args): void
     {
         $this->expectException(\Exception::class);
-        
+
         Reflections::invokeMethod($this->extender, '__call', $args);
     }
 }
