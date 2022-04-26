@@ -1,0 +1,366 @@
+{
+    "list": {
+        "fields": [
+            {
+                "name": "id_dato",
+                "alias": "id",
+                "type": "integer"
+            },
+            {
+                "name": "variabile",
+                "alias": null,
+                "type": "integer"
+            },
+            {
+                "name": "valore",
+                "alias": null,
+                "type": "float"
+            },
+            {
+                "name": "CONVERT(varchar, data_e_ora, 20)",
+                "alias": "data_e_ora",
+                "type": "dateTime"
+            },
+            {
+                "name": "tipo_dato",
+                "alias": null,
+                "type": "integer"
+            }
+        ],
+        "table": "dati_acquisiti",
+        "where": {
+            "and" : [
+                {
+                    "field": "variabile",
+                    "operator": "=",
+                    "value": {
+                        "param": "var",
+                        "bind": ":variabile",
+                        "type": "int",
+                        "null": false,
+                        "check": {
+                            "type": "integer",
+                            "params": []
+                        }
+                    }
+                },
+                {
+                    "field": "tipo_dato",
+                    "operator": "=",
+                    "value": {
+                        "param": "type",
+                        "bind": ":tipoDato",
+                        "type": "int",
+                        "null": false,
+                        "check": {
+                            "type": "enum",
+                            "params": [
+                                [1,2]
+                            ]
+                        }
+                    }
+                },
+                {
+                    "field": "data_e_ora",
+                    "operator": ">",
+                    "value": {
+                        "param": "datefrom",
+                        "bind": ":dataIniziale",
+                        "type": "str",
+                        "null": false,
+                        "check": {
+                            "type": "dateTime",
+                            "params": [
+                                true
+                            ]
+                        }
+                    }
+                },
+                {
+                    "field": "data_e_ora",
+                    "operator": "<",
+                    "value": {
+                        "param": "dateto",
+                        "bind": ":dataFinale",
+                        "type": "str",
+                        "null": false,
+                        "check": {
+                            "type": "dateTime",
+                            "params": [
+                                true
+                            ]
+                        }
+                    }
+                }
+            ]        
+        },
+        "order": [
+            {
+                "field": "data_e_ora",
+                "type": "asc"
+            }
+        ]           
+    },
+    "read": {
+        "fields": [
+            {
+                "name": "id_dato",
+                "alias": "id",
+                "type": "integer"
+            },
+            {
+                "name": "variabile",
+                "alias": null,
+                "type": "integer"
+            },
+            {
+                "name": "valore",
+                "alias": null,
+                "type": "float"
+            },
+            {
+                "name": "CONVERT(varchar, data_e_ora, 20)",
+                "alias": "data_e_ora",
+                "type": "dateTime"
+            },
+            {
+                "name": "tipo_dato",
+                "alias": null,
+                "type": "integer"
+            }
+        ],
+        "table": "dati_acquisiti",
+        "where": {
+            "and" : [
+                {
+                    "field": "id_dato",
+                    "operator": "=",
+                    "value": {
+                        "param": "id",
+                        "bind": ":id_dato",
+                        "type": "int",
+                        "null": false,
+                        "check": {
+                            "type": "integer",
+                            "params": []
+                        }
+                    }
+                }
+            ]        
+        },
+        "order": []           
+    },
+    "create": {
+        "table": "dati_acquisiti",
+        "values": [
+            {
+                "field": "variabile",
+                "value": {
+                    "param": "var",
+                    "bind": ":variabile",
+                    "type": "int",
+                    "null": false,
+                    "check": {
+                        "type": "integer",
+                        "params": []
+                    }
+                }
+            },
+            {
+                "field": "tipo_dato",
+                "value": {
+                    "param": "type",
+                    "bind": ":tipoDato",
+                    "type": "int",
+                    "null": false,
+                    "check": {
+                        "type": "enum",
+                        "params": [
+                            [1,2]
+                        ]
+                    }
+                }
+            },
+            {
+                "field": "data_e_ora",
+                "value": {
+                    "param": "date",
+                    "bind": ":data_e_ora",
+                    "type": "str",
+                    "null": false,
+                    "check": {
+                        "type": "dateTime",
+                        "params": [
+                            true
+                        ]
+                    }
+                }
+            },
+            {
+                "field": "valore",
+                "value": {
+                    "param": "val",
+                    "bind": ":valore",
+                    "type": "int",
+                    "null": false,
+                    "check": {
+                        "type": "float",
+                        "params": []
+                    }
+                }
+            },
+            {
+                "field": "unita_misura",
+                "value": {
+                    "param": "unit",
+                    "bind": ":unita_misura",
+                    "type": "str",
+                    "null": true,
+                    "check": {
+                        "type": "str",
+                        "params": []
+                    }
+                }
+            },
+            {
+                "field": "impianto",
+                "value": {
+                    "param": "imp",
+                    "bind": ":impianto",
+                    "type": "int",
+                    "null": true,
+                    "check": {
+                        "type": "int",
+                        "params": []
+                    }
+                }
+            }
+        ]      
+    },
+    "update": {
+        "table": "dati_acquisiti",
+        "set": [
+            {
+                "field": "variabile",
+                "value": {
+                    "param": "var",
+                    "bind": ":variabile",
+                    "type": "int",
+                    "null": true,
+                    "check": {
+                        "type": "integer",
+                        "params": []
+                    }
+                }
+            },
+            {
+                "field": "tipo_dato",
+                "value": {
+                    "param": "type",
+                    "bind": ":tipoDato",
+                    "type": "int",
+                    "null": true,
+                    "check": {
+                        "type": "enum",
+                        "params": [
+                            [1,2]
+                        ]
+                    }
+                }
+            },
+            {
+                "field": "data_e_ora",
+                "value": {
+                    "param": "date",
+                    "bind": ":data_e_ora",
+                    "type": "str",
+                    "null": true,
+                    "check": {
+                        "type": "dateTime",
+                        "params": [
+                            true
+                        ]
+                    }
+                }
+            },
+            {
+                "field": "valore",
+                "value": {
+                    "param": "val",
+                    "bind": ":valore",
+                    "type": "int",
+                    "null": true,
+                    "check": {
+                        "type": "float",
+                        "params": []
+                    }
+                }
+            },
+            {
+                "field": "unita_misura",
+                "value": {
+                    "param": "unit",
+                    "bind": ":unita_misura",
+                    "type": "str",
+                    "null": true,
+                    "check": {
+                        "type": "str",
+                        "params": []
+                    }
+                }
+            },
+            {
+                "field": "impianto",
+                "value": {
+                    "param": "imp",
+                    "bind": ":impianto",
+                    "type": "int",
+                    "null": true,
+                    "check": {
+                        "type": "int",
+                        "params": []
+                    }
+                }
+            }
+        ],
+        "where": {
+            "and" : [
+                {
+                    "field": "id_dato",
+                    "operator": "=",
+                    "value": {
+                        "param": "id",
+                        "bind": ":id_dato",
+                        "type": "int",
+                        "null": false,
+                        "check": {
+                            "type": "integer",
+                            "params": []
+                        }
+                    }
+                }
+            ]        
+        }
+    },
+    "delete": {
+        "table": "dati_acquisiti",
+        "where": {
+            "and" : [
+                {
+                    "field": "id_dato",
+                    "operator": "=",
+                    "value": {
+                        "param": "id",
+                        "bind": ":id_dato",
+                        "type": "int",
+                        "null": false,
+                        "check": {
+                            "type": "integer",
+                            "params": []
+                        }
+                    }
+                }
+            ]        
+        }        
+    }
+}
